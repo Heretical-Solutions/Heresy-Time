@@ -1,3 +1,5 @@
+using HereticalSolutions.Delegates;
+
 namespace HereticalSolutions.Time
 {
     public interface ITimer
@@ -18,7 +20,9 @@ namespace HereticalSolutions.Time
 
         #region Callbacks
 
-        ITimerFinishedNotifier Callback { get; set; }
+        INonAllocSubscribableSingleArgGeneric<ITimer> OnStart { get; }
+        
+        INonAllocSubscribableSingleArgGeneric<ITimer> OnFinish { get; }
 
         #endregion
 

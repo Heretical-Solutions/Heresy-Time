@@ -1,3 +1,5 @@
+using HereticalSolutions.Delegates;
+
 using HereticalSolutions.Repositories;
 
 namespace HereticalSolutions.Time.Timers
@@ -16,6 +18,13 @@ namespace HereticalSolutions.Time.Timers
         public RuntimeTimer(
             string id,
             float defaultDuration,
+            
+            IPublisherSingleArgGeneric<ITimer> onStartAsPublisher,
+            INonAllocSubscribableSingleArgGeneric<ITimer> onStartAsSubscribable,
+            
+            IPublisherSingleArgGeneric<ITimer> onFinishAsPublisher,
+            INonAllocSubscribableSingleArgGeneric<ITimer> onFinishAsSubscribable,
+            
             IReadOnlyRepository<ETimerState, ITimerStrategy<IRuntimeTimerContext>> strategyRepository)
         {
             ID = id;
@@ -23,7 +32,18 @@ namespace HereticalSolutions.Time.Timers
             TimeElapsed = 0f;
 
             CurrentDuration = DefaultDuration = defaultDuration;
+            
 
+            OnStartAsPublisher = onStartAsPublisher;
+            
+            OnStart = onStartAsSubscribable;
+            
+            
+            OnFinishAsPublisher = onFinishAsPublisher;
+
+            OnFinish = onFinishAsSubscribable;
+            
+            
             this.strategyRepository = strategyRepository;
             
             SetState(ETimerState.INACTIVE);
@@ -36,7 +56,11 @@ namespace HereticalSolutions.Time.Timers
         public float CurrentDuration { get; set; }
 
         public float DefaultDuration { get; private set; }
+
+        public IPublisherSingleArgGeneric<ITimer> OnStartAsPublisher { get; private set; }
         
+        public IPublisherSingleArgGeneric<ITimer> OnFinishAsPublisher { get; private set; }
+
         #endregion
         
         #region ITimer
@@ -49,9 +73,11 @@ namespace HereticalSolutions.Time.Timers
         {
             get => currentStrategy.GetProgress(this);
         }
+
+        public INonAllocSubscribableSingleArgGeneric<ITimer> OnStart { get; private set; }
         
-        public ITimerFinishedNotifier Callback { get; set; }
-        
+        public INonAllocSubscribableSingleArgGeneric<ITimer> OnFinish { get; private set; }
+
         public bool Repeat { get; set; }
         
         public void Reset()

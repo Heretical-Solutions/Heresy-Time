@@ -4,6 +4,7 @@ namespace HereticalSolutions.Time.Strategies
     {
         public float GetProgress(IRuntimeTimerContext context)
         {
+            //THIS ONE IS AS EXPECTED. IF THE TIMER WAS FINISHED PREMATURELY BY A FINISH() CALL RATHER THAN TIMER ACTUALLY RUNNING OUT WE MIGHT BE CURIOUS HOW MUCH OF A PROGRESS WAS MADE SO FAR
             if ((context.CurrentDuration - MathHelpers.EPSILON) < 0f)
                 return 0f;
                         
@@ -24,38 +25,35 @@ namespace HereticalSolutions.Time.Strategies
             context.TimeElapsed = 0f;
             
             context.SetState(ETimerState.STARTED);
+            
+            context.OnStartAsPublisher.Publish((ITimer)context);
         }
 
         public void Pause(IRuntimeTimerContext context)
         {
-            context.SetState(ETimerState.PAUSED);
+            //Why bother?
         }
 
         public void Resume(IRuntimeTimerContext context)
         {
-            context.SetState(ETimerState.STARTED);
+            //Why bother?
         }
         
         public void Abort(IRuntimeTimerContext context)
         {
-            context.SetState(ETimerState.INACTIVE);
-
             context.TimeElapsed = 0f;
+            
+            context.SetState(ETimerState.INACTIVE);
         }
         
         public void Finish(IRuntimeTimerContext context)
         {
-            context.SetState(ETimerState.FINISHED);
-            
-            //TODO: CALLBACK!!!!
+            //Why bother?
         }
 
         public void Tick(IRuntimeTimerContext context, float delta)
         {
-            context.TimeElapsed += delta;
-            
-            if (context.TimeElapsed > context.CurrentDuration)
-                Finish(context);
+            //Why bother?
         }
     }
 }

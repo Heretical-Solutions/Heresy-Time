@@ -12,8 +12,6 @@ namespace HereticalSolutions.Time.Strategies
             context.TimeElapsed = 0f;
 
             context.CurrentDuration = context.DefaultDuration;
-            
-            context.SetState(ETimerState.INACTIVE);
         }
 
         public void Start(IRuntimeTimerContext context)
@@ -21,34 +19,33 @@ namespace HereticalSolutions.Time.Strategies
             context.TimeElapsed = 0f;
             
             context.SetState(ETimerState.STARTED);
+            
+            context.OnStartAsPublisher.Publish((ITimer)context);
         }
 
         public void Pause(IRuntimeTimerContext context)
         {
-            context.SetState(ETimerState.PAUSED);
+            //Why bother?
         }
 
         public void Resume(IRuntimeTimerContext context)
         {
-            context.SetState(ETimerState.STARTED);
+            //Why bother?
         }
         
         public void Abort(IRuntimeTimerContext context)
         {
-            context.SetState(ETimerState.INACTIVE);
-
             context.TimeElapsed = 0f;
         }
         
         public void Finish(IRuntimeTimerContext context)
         {
-            context.SetState(ETimerState.FINISHED);
-            
-            //TODO: CALLBACK!!!!
+            //ENSURE WHETHER CALLING FINISH() ON INACTIVE TIMER SHOULD NOT BE CALLING A CALLBACK
         }
 
         public void Tick(IRuntimeTimerContext context, float delta)
         {
+            //Why bother?
         }
     }
 }

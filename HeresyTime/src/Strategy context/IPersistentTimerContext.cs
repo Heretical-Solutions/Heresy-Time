@@ -1,7 +1,8 @@
-namespace HeresyTime.Strategy_context
+using HereticalSolutions.Delegates;
+
+namespace HereticalSolutions.Time
 {
-    public class IPersistentTimerContext
+    public interface IPersistentTimerContext : ITimerWithState
     {
-        
     }
 }

@@ -1,3 +1,5 @@
+using HereticalSolutions.Repositories;
+
 namespace HereticalSolutions.Time.Timers
 {
     public class RuntimeTimer
@@ -14,7 +16,7 @@ namespace HereticalSolutions.Time.Timers
         public RuntimeTimer(
             string id,
             float defaultDuration,
-            IReadOnlyObjectRepository strategyRepository)
+            IReadOnlyRepository<ETimerState, ITimerStrategy<IRuntimeTimerContext>> strategyRepository)
         {
             ID = id;
 

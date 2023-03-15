@@ -1,32 +1,42 @@
-using System;
-
 namespace HereticalSolutions.Time.Timers
 {
     public class RuntimeTimer
-        : IRuntimeTimer,
+        : ITimer,
+          IRuntimeTimer,
+          IRuntimeTimerContext,
+          ITimerWithState,
           ITickable
     {
-        private const float EPSILON = 0.0001f;
-        
-        private float timeElapsed;
+        private ITimerStrategy<IRuntimeTimerContext> currentStrategy;
 
-        private float currentDuration;
-
-        private float defaultDuration;
+        private readonly IReadOnlyRepository<ETimerState, ITimerStrategy<IRuntimeTimerContext>> strategyRepository;
 
         public RuntimeTimer(
             string id,
-            float defaultDuration)
+            float defaultDuration,
+            IReadOnlyObjectRepository strategyRepository)
         {
             ID = id;
 
-            State = ETimerState.INACTIVE;
+            TimeElapsed = 0f;
 
-            timeElapsed = 0f;
+            CurrentDuration = DefaultDuration = defaultDuration;
 
-            this.currentDuration = this.defaultDuration = defaultDuration;
+            this.strategyRepository = strategyRepository;
+            
+            SetState(ETimerState.INACTIVE);
         }
 
+        #region IRuntimeTimerContext
+        
+        public float TimeElapsed { get; set; }
+
+        public float CurrentDuration { get; set; }
+
+        public float DefaultDuration { get; private set; }
+        
+        #endregion
+        
         #region ITimer
         
         public string ID { get; private set; }
@@ -35,24 +45,7 @@ namespace HereticalSolutions.Time.Timers
 
         public float Progress
         {
-            get
-            {
-                switch (State)
-                {
-                    case ETimerState.INACTIVE:
-                        return 0f;
-                    
-                    case ETimerState.STARTED:
-                    case ETimerState.PAUSED:
-                    case ETimerState.FINISHED:
-                        if ((currentDuration - EPSILON) < 0f)
-                            return 0f;
-                        
-                        return (timeElapsed / currentDuration).Clamp(0f, 1f);
-                }
-
-                return -1f;
-            }
+            get => currentStrategy.GetProgress(this);
         }
         
         public ITimerFinishedNotifier Callback { get; set; }
@@ -61,60 +54,55 @@ namespace HereticalSolutions.Time.Timers
         
         public void Reset()
         {
-            State = ETimerState.INACTIVE;
-
-            timeElapsed = 0f;
-
-            currentDuration = defaultDuration;
+            currentStrategy.Reset(this);
         }
 
         public void Start()
         {
-            State = ETimerState.STARTED;
-
-            timeElapsed = 0f;
+            currentStrategy.Start(this);
         }
 
         public void Pause()
         {
-            State = ETimerState.PAUSED;
+            currentStrategy.Pause(this);
         }
 
         public void Resume()
         {
-            State = ETimerState.STARTED;
+            currentStrategy.Resume(this);
         }
 
         public void Abort()
         {
-            State = ETimerState.INACTIVE;
-
-            timeElapsed = 0f;
+            currentStrategy.Abort(this);
         }
 
         public void Finish()
         {
-            State = ETimerState.FINISHED;
-            
-            
+            currentStrategy.Finish(this);
         }
         
         #endregion
 
         #region IRuntimeTimer
         
-        public float Countdown { get; }
-        public float TimeElapsed { get; }
-        public float CurrentDuration { get; }
-        public float DefaultDuration { get; }
+        public float Countdown
+        {
+            get => (CurrentDuration - TimeElapsed);
+        }
+        
         public void Reset(float duration)
         {
-            throw new NotImplementedException();
+            Reset();
+
+            CurrentDuration = duration;
         }
 
         public void Start(float duration)
         {
-            throw new NotImplementedException();
+            Start();
+
+            CurrentDuration = duration;
         }
         
         #endregion
@@ -123,7 +111,18 @@ namespace HereticalSolutions.Time.Timers
 
         public void Tick(float delta)
         {
+            currentStrategy.Tick(this, delta);
+        }
+
+        #endregion
+
+        #region ITimerWithState
+
+        public void SetState(ETimerState state)
+        {
+            State = state;
             
+            currentStrategy = strategyRepository.Get(state);
         }
 
         #endregion

@@ -4,4 +4,8 @@
     <TargetFramework>net4.7</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="src\Strategies\Persistent" />
+  </ItemGroup>
+
 </Project>

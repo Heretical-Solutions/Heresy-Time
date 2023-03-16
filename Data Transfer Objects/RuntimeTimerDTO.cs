@@ -1,7 +1,7 @@
 namespace HereticalSolutions.Time
 {
     [System.Serializable]
-    public class RuntimeTimerDAO
+    public class RuntimeTimerDTO
     {
         public string ID;
 

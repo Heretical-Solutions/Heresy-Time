@@ -1,5 +1,7 @@
 using System;
 
+using HereticalSolutions.Delegates;
+
 namespace HereticalSolutions.Time
 {
     public interface IPersistentTimer : ITimer
@@ -14,9 +16,9 @@ namespace HereticalSolutions.Time
 
         #region Countdown and Time elapsed
 
-        TimeSpan CountdownSpan { get; }
-
         TimeSpan TimeElapsedSpan { get; }
+        
+        TimeSpan CountdownSpan { get; }
 
         #endregion
 
@@ -30,9 +32,17 @@ namespace HereticalSolutions.Time
 
         #region Controls
 
-        void Reset(float duration);
+        void Reset(TimeSpan duration);
 
-        void Start(float duration);
+        void Start(TimeSpan duration);
+
+        #endregion
+        
+        #region Callbacks
+
+        INonAllocSubscribableSingleArgGeneric<IPersistentTimer> OnStart { get; }
+        
+        INonAllocSubscribableSingleArgGeneric<IPersistentTimer> OnFinish { get; }
 
         #endregion
     }

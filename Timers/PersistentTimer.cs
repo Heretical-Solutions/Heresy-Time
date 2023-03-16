@@ -1,37 +1,42 @@
+using System;
 using HereticalSolutions.Delegates;
 
 using HereticalSolutions.Repositories;
 
 namespace HereticalSolutions.Time.Timers
 {
-    public class RuntimeTimer
+    public class PersistentTimer
         : ITimer,
-          IRuntimeTimer,
-          IRuntimeTimerContext,
+          IPersistentTimer,
+          IPersistentTimerContext,
           ITimerWithState,
           ITickable
     {
-        private ITimerStrategy<IRuntimeTimerContext, float> currentStrategy;
+        private ITimerStrategy<IPersistentTimerContext, TimeSpan> currentStrategy;
 
-        private readonly IReadOnlyRepository<ETimerState, ITimerStrategy<IRuntimeTimerContext, float>> strategyRepository;
+        private readonly IReadOnlyRepository<ETimerState, ITimerStrategy<IPersistentTimerContext, TimeSpan>> strategyRepository;
 
-        public RuntimeTimer(
+        public PersistentTimer(
             string id,
-            float defaultDuration,
+            TimeSpan defaultDurationSpan,
             
-            IPublisherSingleArgGeneric<IRuntimeTimer> onStartAsPublisher,
-            INonAllocSubscribableSingleArgGeneric<IRuntimeTimer> onStartAsSubscribable,
+            IPublisherSingleArgGeneric<IPersistentTimer> onStartAsPublisher,
+            INonAllocSubscribableSingleArgGeneric<IPersistentTimer> onStartAsSubscribable,
             
-            IPublisherSingleArgGeneric<IRuntimeTimer> onFinishAsPublisher,
-            INonAllocSubscribableSingleArgGeneric<IRuntimeTimer> onFinishAsSubscribable,
+            IPublisherSingleArgGeneric<IPersistentTimer> onFinishAsPublisher,
+            INonAllocSubscribableSingleArgGeneric<IPersistentTimer> onFinishAsSubscribable,
             
-            IReadOnlyRepository<ETimerState, ITimerStrategy<IRuntimeTimerContext, float>> strategyRepository)
+            IReadOnlyRepository<ETimerState, ITimerStrategy<IPersistentTimerContext, TimeSpan>> strategyRepository)
         {
             ID = id;
 
-            CurrentTimeElapsed = 0f;
+            StartTime = default(DateTime);
+            
+            EstimatedFinishTime = default(DateTime);
 
-            CurrentDuration = DefaultDuration = defaultDuration;
+            SavedProgress = default(TimeSpan);
+
+            CurrentDurationSpan = DefaultDurationSpan = defaultDurationSpan;
             
 
             OnStartAsPublisher = onStartAsPublisher;
@@ -49,27 +54,31 @@ namespace HereticalSolutions.Time.Timers
             SetState(ETimerState.INACTIVE);
         }
 
-        #region IRuntimeTimerContext
+        #region IPersistentTimerContext
         
         #region Variables
         
-        public float CurrentTimeElapsed { get; set; }
-
-        #endregion
+        public DateTime StartTime { get; set; }
         
+        public DateTime EstimatedFinishTime { get; set; }
+
+        public TimeSpan SavedProgress { get; set; }
+        
+        #endregion
+
         #region Duration
         
-        public float CurrentDuration { get; set; }
-
-        public float DefaultDuration { get; private set; }
-
+        public TimeSpan CurrentDurationSpan { get; set; }
+        
+        public TimeSpan DefaultDurationSpan { get; set; }
+        
         #endregion
 
         #region Publishers
         
-        public IPublisherSingleArgGeneric<IRuntimeTimer> OnStartAsPublisher { get; private set; }
+        public IPublisherSingleArgGeneric<IPersistentTimer> OnStartAsPublisher { get; private set; }
         
-        public IPublisherSingleArgGeneric<IRuntimeTimer> OnFinishAsPublisher { get; private set; }
+        public IPublisherSingleArgGeneric<IPersistentTimer> OnFinishAsPublisher { get; private set; }
 
         #endregion
         
@@ -84,18 +93,18 @@ namespace HereticalSolutions.Time.Timers
         public ETimerState State { get; private set; }
 
         #endregion
-        
+
         #region Progress
         
         public float Progress
         {
             get => currentStrategy.GetProgress(this);
         }
-        
+
         #endregion
 
         #region Controls
-        
+
         public bool Accumulate { get; set; }
 
         public bool Repeat { get; set; }
@@ -134,45 +143,45 @@ namespace HereticalSolutions.Time.Timers
         
         #endregion
 
-        #region IRuntimeTimer
-        
+        #region IPersistentTimer
+
         #region Countdown and Time elapsed
-        
-        public float TimeElapsed
+
+        public TimeSpan TimeElapsedSpan
         {
             get => currentStrategy.GetTimeElapsed(this);
         }
-        
-        public float Countdown
+
+        public TimeSpan CountdownSpan
         {
             get => currentStrategy.GetCountdown(this);
         }
-        
-        #endregion
 
+        #endregion
+        
         #region Controls
         
-        public void Reset(float duration)
+        public void Reset(TimeSpan durationSpan)
         {
             Reset();
-
-            CurrentDuration = duration;
+            
+            CurrentDurationSpan = durationSpan;
         }
 
-        public void Start(float duration)
+        public void Start(TimeSpan durationSpan)
         {
-            CurrentDuration = duration;
+            CurrentDurationSpan = durationSpan;
             
             Start();
         }
         
         #endregion
-        
+
         #region Callbacks
 
-        public INonAllocSubscribableSingleArgGeneric<IRuntimeTimer> OnStart { get; private set; }
+        public INonAllocSubscribableSingleArgGeneric<IPersistentTimer> OnStart { get; private set; }
         
-        public INonAllocSubscribableSingleArgGeneric<IRuntimeTimer> OnFinish { get; private set; }
+        public INonAllocSubscribableSingleArgGeneric<IPersistentTimer> OnFinish { get; private set; }
 
         #endregion
         

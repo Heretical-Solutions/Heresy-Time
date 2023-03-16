@@ -8,13 +8,19 @@ namespace HereticalSolutions.Time
         public string ID;
 
         public ETimerState State;
+
+        public DateTime StartTime;
+
+        public DateTime EstimatedFinishTime;
+
+        public TimeSpan SavedProgress;
+        
+        public bool Accumulate;
         
         public bool Repeat;
         
-        public DateTime StartTime;
-
-        public TimeSpan Duration;
-
-        public DateTime EstimatedFinishTime;
+        public TimeSpan CurrentDuration;
+        
+        public TimeSpan DefaultDuration;
     }
 }

@@ -4,14 +4,34 @@ namespace HereticalSolutions.Time
 {
     public interface IRuntimeTimerContext : ITimerWithState
     {
-        float TimeElapsed { get; set; }
+        #region Variables
+        
+        float CurrentTimeElapsed { get; set; }
 
+        #endregion
+        
+        #region Duration
+        
         float CurrentDuration { get; set; }
 
         float DefaultDuration { get; }
+
+        #endregion
         
-        IPublisherSingleArgGeneric<ITimer> OnStartAsPublisher { get; }
+        #region Controls
         
-        IPublisherSingleArgGeneric<ITimer> OnFinishAsPublisher { get; }
+        bool Accumulate { get; }
+
+        bool Repeat { get; }
+
+        #endregion
+
+        #region Publishers
+        
+        IPublisherSingleArgGeneric<IRuntimeTimer> OnStartAsPublisher { get; }
+        
+        IPublisherSingleArgGeneric<IRuntimeTimer> OnFinishAsPublisher { get; }
+        
+        #endregion
     }
 }

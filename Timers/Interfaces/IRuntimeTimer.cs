@@ -1,12 +1,14 @@
+using HereticalSolutions.Delegates;
+
 namespace HereticalSolutions.Time
 {
     public interface IRuntimeTimer : ITimer
     {
         #region Countdown and Time elapsed
 
-        float Countdown { get; }
-
         float TimeElapsed { get; }
+        
+        float Countdown { get; }
 
         #endregion
 
@@ -23,6 +25,14 @@ namespace HereticalSolutions.Time
         void Reset(float duration);
 
         void Start(float duration);
+
+        #endregion
+        
+        #region Callbacks
+
+        INonAllocSubscribableSingleArgGeneric<IRuntimeTimer> OnStart { get; }
+        
+        INonAllocSubscribableSingleArgGeneric<IRuntimeTimer> OnFinish { get; }
 
         #endregion
     }

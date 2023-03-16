@@ -1,5 +1,3 @@
-using HereticalSolutions.Delegates;
-
 namespace HereticalSolutions.Time
 {
     public interface ITimer
@@ -18,16 +16,16 @@ namespace HereticalSolutions.Time
 
         #endregion
 
-        #region Callbacks
-
-        INonAllocSubscribableSingleArgGeneric<ITimer> OnStart { get; }
-        
-        INonAllocSubscribableSingleArgGeneric<ITimer> OnFinish { get; }
-
-        #endregion
-
         #region Controls
 
+        /// <summary>
+        /// If set to true, instead of checking the elapsed time against the duration the timer works only as an accumulative counter of time
+        /// </summary>
+        bool Accumulate { get; set; }
+
+        /// <summary>
+        /// If set to true, instead of translating into finished state on timeout the timer starts another cycle and fires OnFinish/OnStart callbacks
+        /// </summary>
         bool Repeat { get; set; }
 
         /// <summary>

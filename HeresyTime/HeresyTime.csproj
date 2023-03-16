@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="src\Strategies\Persistent" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="../Dependencies/HeresyPools/HeresyPools/HeresyPools.csproj" />
     <ProjectReference Include="../Dependencies/HeresyRepositories/HeresyDatabasesAndRepositories/HeresyDatabasesAndRepositories.csproj" />
     <ProjectReference Include="..\Dependencies\HeresyDelegates\HeresyDelegatesAndSubscriptions\HeresyDelegatesAndSubscriptions.csproj" />

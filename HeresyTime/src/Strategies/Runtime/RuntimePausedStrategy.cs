@@ -1,18 +1,41 @@
 namespace HereticalSolutions.Time.Strategies
 {
-    public class RuntimePausedStrategy : ITimerStrategy<IRuntimeTimerContext>
+    public class RuntimePausedStrategy : ITimerStrategy<IRuntimeTimerContext, float>
     {
+        #region Progress
+        
         public float GetProgress(IRuntimeTimerContext context)
         {
+            if (context.Accumulate)
+                return 0f;
+            
             if ((context.CurrentDuration - MathHelpers.EPSILON) < 0f)
                 return 0f;
                         
-            return (context.TimeElapsed / context.CurrentDuration).Clamp(0f, 1f);
+            return (context.CurrentTimeElapsed / context.CurrentDuration).Clamp(0f, 1f);
+        }
+        
+        #endregion
+
+        #region Countdown and Time elapsed
+        
+        public float GetTimeElapsed(IRuntimeTimerContext context)
+        {
+            return context.CurrentTimeElapsed;
+        }
+        
+        public float GetCountdown(IRuntimeTimerContext context)
+        {
+            return context.CurrentDuration - context.CurrentTimeElapsed;
         }
 
+        #endregion
+        
+        #region Controls
+        
         public void Reset(IRuntimeTimerContext context)
         {
-            context.TimeElapsed = 0f;
+            context.CurrentTimeElapsed = 0f;
 
             context.CurrentDuration = context.DefaultDuration;
             
@@ -36,7 +59,7 @@ namespace HereticalSolutions.Time.Strategies
         
         public void Abort(IRuntimeTimerContext context)
         {
-            context.TimeElapsed = 0f;
+            context.CurrentTimeElapsed = 0f;
             
             context.SetState(ETimerState.INACTIVE);
         }
@@ -45,12 +68,14 @@ namespace HereticalSolutions.Time.Strategies
         {
             context.SetState(ETimerState.FINISHED);
             
-            context.OnFinishAsPublisher.Publish((ITimer)context);
+            context.OnFinishAsPublisher.Publish((IRuntimeTimer)context);
         }
 
         public void Tick(IRuntimeTimerContext context, float delta)
         {
             //Why bother?
         }
+        
+        #endregion
     }
 }

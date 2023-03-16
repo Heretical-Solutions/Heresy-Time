@@ -1,7 +1,9 @@
 namespace HereticalSolutions.Time
 {
-    public interface ITimerStrategy<TStrategyContext>
+    public interface ITimerStrategy<TStrategyContext, TTimeValue>
     {
+        #region Progress
+        
         /// <summary>
         /// Get current progress of the timer, ranged between 0 (start) and 1 (finish)
         /// </summary>
@@ -9,6 +11,28 @@ namespace HereticalSolutions.Time
         /// <returns>Current timer progress</returns>
         float GetProgress(TStrategyContext context);
 
+        #endregion
+
+        #region Countdown and Time elapsed
+        
+        /// <summary>
+        /// Get the elapsed time of the timer
+        /// </summary>
+        /// <param name="context">Timer context</param>
+        /// <returns>Elapsed time</returns>
+        TTimeValue GetTimeElapsed(TStrategyContext context);
+
+        /// <summary>
+        /// Get the time left for the timer
+        /// </summary>
+        /// <param name="context">Timer context</param>
+        /// <returns>Countdown duration</returns>
+        TTimeValue GetCountdown(TStrategyContext context);
+        
+        #endregion
+        
+        #region Controls
+        
         /// <summary>
         /// Resets the timer. State becomes INACTIVE, time elapsed becomes zero, countdown is reset to current duration, current duration is set to default duration, start and estimated finish times are reset to default
         /// </summary>
@@ -51,5 +75,7 @@ namespace HereticalSolutions.Time
         /// <param name="context">Timer context</param>
         /// <param name="delta">Time delta between subsequent ticks</param>
         void Tick(TStrategyContext context, float delta);
+        
+        #endregion
     }
 }

@@ -3,7 +3,7 @@ using System;
 namespace HereticalSolutions.Time
 {
     [System.Serializable]
-    public class PersistentTimerDAO
+    public class PersistentTimerDTO
     {
         public string ID;
 
@@ -19,8 +19,8 @@ namespace HereticalSolutions.Time
         
         public bool Repeat;
         
-        public TimeSpan CurrentDuration;
+        public TimeSpan CurrentDurationSpan;
         
-        public TimeSpan DefaultDuration;
+        public TimeSpan DefaultDurationSpan;
     }
 }

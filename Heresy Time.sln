@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeresyPools", "Dependencies
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeresyDelegatesAndSubscriptions", "Dependencies\HeresyDelegates\HeresyDelegatesAndSubscriptions\HeresyDelegatesAndSubscriptions.csproj", "{C7F59C3B-1B74-4EE3-BAC1-49C5E47C039E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeresyPersistence", "Dependencies\HeresyPersistence\HeresyPersistence\HeresyPersistence.csproj", "{074DF98F-C96F-4E86-88C0-44B37FD003D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{C7F59C3B-1B74-4EE3-BAC1-49C5E47C039E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7F59C3B-1B74-4EE3-BAC1-49C5E47C039E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7F59C3B-1B74-4EE3-BAC1-49C5E47C039E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{074DF98F-C96F-4E86-88C0-44B37FD003D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{074DF98F-C96F-4E86-88C0-44B37FD003D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{074DF98F-C96F-4E86-88C0-44B37FD003D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{074DF98F-C96F-4E86-88C0-44B37FD003D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

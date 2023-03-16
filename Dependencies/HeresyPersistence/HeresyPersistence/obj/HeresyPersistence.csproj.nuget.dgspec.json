@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\LoremIpsum\\Repositories\\Heretical Solutions\\Heresy Persistence\\HeresyPersistence\\HeresyPersistence.csproj": {}
+    "C:\\LoremIpsum\\Repositories\\Heretical Solutions\\Heresy Time\\Dependencies\\HeresyPersistence\\HeresyPersistence\\HeresyPersistence.csproj": {}
   },
   "projects": {
-    "C:\\LoremIpsum\\Repositories\\Heretical Solutions\\Heresy Persistence\\HeresyPersistence\\HeresyPersistence.csproj": {
+    "C:\\LoremIpsum\\Repositories\\Heretical Solutions\\Heresy Time\\Dependencies\\HeresyPersistence\\HeresyPersistence\\HeresyPersistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\LoremIpsum\\Repositories\\Heretical Solutions\\Heresy Persistence\\HeresyPersistence\\HeresyPersistence.csproj",
+        "projectUniqueName": "C:\\LoremIpsum\\Repositories\\Heretical Solutions\\Heresy Time\\Dependencies\\HeresyPersistence\\HeresyPersistence\\HeresyPersistence.csproj",
         "projectName": "HeresyPersistence",
-        "projectPath": "C:\\LoremIpsum\\Repositories\\Heretical Solutions\\Heresy Persistence\\HeresyPersistence\\HeresyPersistence.csproj",
+        "projectPath": "C:\\LoremIpsum\\Repositories\\Heretical Solutions\\Heresy Time\\Dependencies\\HeresyPersistence\\HeresyPersistence\\HeresyPersistence.csproj",
         "packagesPath": "C:\\Users\\divanilov\\.nuget\\packages\\",
-        "outputPath": "C:\\LoremIpsum\\Repositories\\Heretical Solutions\\Heresy Persistence\\HeresyPersistence\\obj\\",
+        "outputPath": "C:\\LoremIpsum\\Repositories\\Heretical Solutions\\Heresy Time\\Dependencies\\HeresyPersistence\\HeresyPersistence\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet"

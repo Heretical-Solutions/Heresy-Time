@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "S2GFkZGgIlke4iWUOgrl3eBPv2wO1UbmOhyiKydCpZcG/elhruchfsqH8F3+3nJ0WndTGO4AZA+8Y4ziK7wo4g==",
+  "dgSpecHash": "N1oPAziircoqauNdiZ2/CHfIwBE/iuy+QfLMesto1HppHT+glUE3HCk1ba1biNF9kAQmuAOLvSzJ5PCL/dCFlw==",
   "success": true,
-  "projectFilePath": "C:\\LoremIpsum\\Repositories\\Heretical Solutions\\Heresy Persistence\\HeresyPersistence\\HeresyPersistence.csproj",
+  "projectFilePath": "C:\\LoremIpsum\\Repositories\\Heretical Solutions\\Heresy Time\\Dependencies\\HeresyPersistence\\HeresyPersistence\\HeresyPersistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\divanilov\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.2\\microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
     "C:\\Users\\divanilov\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net47\\1.0.2\\microsoft.netframework.referenceassemblies.net47.1.0.2.nupkg.sha512"

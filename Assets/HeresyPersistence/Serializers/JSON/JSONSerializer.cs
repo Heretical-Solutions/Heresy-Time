@@ -26,8 +26,11 @@ namespace HereticalSolutions.Persistence.Serializers
 			{
 				TypeNameHandling = TypeNameHandling.Auto,
 				TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
-				ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+				ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+				DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
 			};
+			
+			writeSerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
 
 			readSerializerSettings = new JsonSerializerSettings
 			{

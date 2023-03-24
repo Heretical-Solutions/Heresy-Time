@@ -27,7 +27,9 @@ namespace HereticalSolutions.Time.Strategies
 
         public TimeSpan GetTimeElapsed(IPersistentTimerContext context)
         {
-            return (DateTime.Now - context.StartTime) + context.SavedProgress;
+            return context.Accumulate
+                ? ((DateTime.Now - context.EstimatedFinishTime) + context.SavedProgress)
+                : ((DateTime.Now - context.StartTime) + context.SavedProgress);
         }
 
         public TimeSpan GetCountdown(IPersistentTimerContext context)
@@ -95,7 +97,17 @@ namespace HereticalSolutions.Time.Strategies
         public void Tick(IPersistentTimerContext context, float delta)
         {
             if (context.Accumulate)
+            {
+                var now = DateTime.Now;
+                
+                TimeSpan dateTimeDelta = now - context.EstimatedFinishTime;
+                
+                context.SavedProgress += dateTimeDelta;
+
+                context.EstimatedFinishTime = now;
+                
                 return;
+            }
             
             if (DateTime.Now > context.EstimatedFinishTime)
             {

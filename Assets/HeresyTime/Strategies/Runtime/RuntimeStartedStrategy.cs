@@ -76,8 +76,10 @@ namespace HereticalSolutions.Time.Strategies
             context.CurrentTimeElapsed += delta;
 
             if (context.Accumulate)
+            {
                 return;
-            
+            }
+
             if (context.CurrentTimeElapsed > context.CurrentDuration)
             {
                 if (context.Repeat)

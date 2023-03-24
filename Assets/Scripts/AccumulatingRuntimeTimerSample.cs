@@ -1,5 +1,3 @@
-using System;
-
 using HereticalSolutions.Persistence;
 using HereticalSolutions.Persistence.Arguments;
 using HereticalSolutions.Persistence.Factories;
@@ -7,11 +5,10 @@ using HereticalSolutions.Persistence.IO;
 
 using HereticalSolutions.Time;
 using HereticalSolutions.Time.Factories;
-using HereticalSolutions.Time.Timers;
 
 using UnityEngine;
 
-public class PersistentTimerSample : MonoBehaviour
+public class AccumulatingRuntimeTimerSample : MonoBehaviour
 {
     [SerializeField]
     private UnityFileSystemSettings fsSettings;
@@ -22,7 +19,7 @@ public class PersistentTimerSample : MonoBehaviour
     [SerializeField]
     private float debugCountdown;
     
-    private IPersistentTimer persistentTimer;
+    private IRuntimeTimer runtimeTimer;
 
     private ISaveVisitor saveVisitor;
 
@@ -35,11 +32,11 @@ public class PersistentTimerSample : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        persistentTimer = TimersFactory.BuildPersistentTimer(
-            "SampleTimer",
-            default(TimeSpan));
+        runtimeTimer = TimersFactory.BuildRuntimeTimer(
+            "AccumulatingPersistentTimer",
+            0f);
 
-        persistentTimer.Accumulate = true;
+        runtimeTimer.Accumulate = true;
         
         saveVisitor = PersistenceFactory.BuildSimpleCompositeVisitorWithTimerVisitors();
 
@@ -52,7 +49,7 @@ public class PersistentTimerSample : MonoBehaviour
         countdown = autosaveCooldown;
         
         
-        persistentTimer.Start();
+        runtimeTimer.Start();
         
         Save();
     }
@@ -60,8 +57,8 @@ public class PersistentTimerSample : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ((ITickable)persistentTimer).Tick(Time.deltaTime);
-        
+        ((ITickable)runtimeTimer).Tick(Time.deltaTime);
+
         countdown -= Time.deltaTime;
 
         if (countdown < 0f)
@@ -76,8 +73,12 @@ public class PersistentTimerSample : MonoBehaviour
 
     private void Save()
     {
-        saveVisitor.Save<IPersistentTimer, PersistentTimerDTO>(persistentTimer, out PersistentTimerDTO dto);
+        saveVisitor.Save<IRuntimeTimer, RuntimeTimerDTO>(runtimeTimer, out RuntimeTimerDTO dto);
 
-        serializer.Serialize<PersistentTimerDTO>(textFileArgument, dto);
+        serializer.Serialize<RuntimeTimerDTO>(textFileArgument, dto);
+        
+        var timeProgress = runtimeTimer.TimeElapsed;
+        
+        Debug.Log($"[AccumulatingRuntimeTimerSample] ACCUMULATING RUNTIME TIMER SERIALIZED. TIME ELAPSED: {timeProgress.ToString()}");
     }
 }

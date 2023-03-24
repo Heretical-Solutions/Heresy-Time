@@ -2,12 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="771f4e40-d3b2-469b-abfd-3b0bdf3edf80" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/JSON/JSONSerializer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Heresy Time/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Heresy Time/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Interfaces/ISerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Interfaces/ISerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/JSONSerializer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/JSONSerializer.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/JSON/JSONSerializer.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Visitors/CompositeVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Visitors/CompositeVisitor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyTime/Data Transfer Objects.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyTime/Persistence/Data Transfer Objects.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyTime/Data Transfer Objects/PersistentTimerDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyTime/Persistence/Data Transfer Objects/PersistentTimerDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyTime/Data Transfer Objects/PersistentTimerDTO.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyTime/Persistence/Data Transfer Objects/PersistentTimerDTO.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyTime/Data Transfer Objects/RuntimeTimerDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyTime/Persistence/Data Transfer Objects/RuntimeTimerDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyTime/Data Transfer Objects/RuntimeTimerDTO.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyTime/Persistence/Data Transfer Objects/RuntimeTimerDTO.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyTime/Visitors.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyTime/Persistence/Visitors.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyTime/Visitors/PersistentTimerVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyTime/Persistence/Visitors/PersistentTimerVisitor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyTime/Visitors/PersistentTimerVisitor.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyTime/Persistence/Visitors/PersistentTimerVisitor.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyTime/Visitors/RuntimeTimerVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyTime/Persistence/Visitors/RuntimeTimerVisitor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyTime/Visitors/RuntimeTimerVisitor.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyTime/Persistence/Visitors/RuntimeTimerVisitor.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/SampleSceneProfile.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/SampleSceneProfile.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Balanced-Renderer.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Balanced-Renderer.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Balanced.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Balanced.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity-Renderer.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity-Renderer.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Performant-Renderer.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Performant-Renderer.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Performant.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Performant.asset.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +36,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/HeresyTime/Visitors/PersistentTimerVisitor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/HeresyTime/Persistence/Visitors/PersistentTimerVisitor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PersistentTimerSample.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Temp/JsonSerializer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Temp/SerializationSettings.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -94,7 +116,7 @@
       <workItem from="1677430051511" duration="3901000" />
       <workItem from="1678850120980" duration="25078000" />
       <workItem from="1679221300218" duration="1894000" />
-      <workItem from="1679547152012" duration="19860000" />
+      <workItem from="1679547152012" duration="23948000" />
     </task>
     <servers />
   </component>

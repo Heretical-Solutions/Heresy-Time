@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization.Formatters.Binary;
 
 using HereticalSolutions.Repositories;
 
@@ -7,6 +8,8 @@ namespace HereticalSolutions.Persistence.Serializers
 	public class BinarySerializer : ISerializer
 	{
 		private readonly IReadOnlyObjectRepository strategyRepository;
+		
+		private readonly BinaryFormatter formatter = new BinaryFormatter();
 
 		public BinarySerializer(IReadOnlyObjectRepository strategyRepository)
 		{
@@ -22,7 +25,7 @@ namespace HereticalSolutions.Persistence.Serializers
 
 			var concreteStrategy = (IBinarySerializationStrategy)strategyObject;
 
-			return concreteStrategy.Serialize<TValue>(argument, DTO);
+			return concreteStrategy.Serialize<TValue>(argument, formatter, DTO);
 		}
 
 		public bool Deserialize<TValue>(ISerializationArgument argument, out TValue DTO)
@@ -34,7 +37,7 @@ namespace HereticalSolutions.Persistence.Serializers
 
 			var concreteStrategy = (IBinarySerializationStrategy)strategyObject;
 
-			return concreteStrategy.Deserialize<TValue>(argument, out DTO);
+			return concreteStrategy.Deserialize<TValue>(argument, formatter, out DTO);
 		}
 		
 		public void Erase(ISerializationArgument argument)

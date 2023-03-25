@@ -8,9 +8,7 @@ namespace HereticalSolutions.Persistence.Serializers
 {
     public class SerializeBinaryIntoTextFileStrategy : IBinarySerializationStrategy
     {
-        private readonly BinaryFormatter formatter = new BinaryFormatter();
-        
-        public bool Serialize<TValue>(ISerializationArgument argument, TValue value)
+        public bool Serialize<TValue>(ISerializationArgument argument, BinaryFormatter formatter, TValue value)
         {
             FileSystemSettings fileSystemSettings = ((TextFileArgument)argument).Settings;
 
@@ -26,7 +24,7 @@ namespace HereticalSolutions.Persistence.Serializers
             return TextFileIO.Write(fileSystemSettings, bytes);
         }
 
-        public bool Deserialize<TValue>(ISerializationArgument argument, out TValue value)
+        public bool Deserialize<TValue>(ISerializationArgument argument, BinaryFormatter formatter, out TValue value)
         {
             FileSystemSettings fileSystemSettings = ((TextFileArgument)argument).Settings;
 

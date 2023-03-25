@@ -75,10 +75,6 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
 
     private void Save()
     {
-        //saveVisitor.Save<IPersistentTimer, PersistentTimerDTO>(persistentTimer, out PersistentTimerDTO dto);
-        
-        //serializer.Serialize<PersistentTimerDTO>(textFileArgument, dto);
-        
         ((IVisitable)persistentTimer).Accept(saveVisitor, out var dto);
         
         serializer.Serialize(textFileArgument, dto);

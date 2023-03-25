@@ -43,5 +43,24 @@ namespace HereticalSolutions.Persistence.Factories
             
             return new BinarySerializer(strategyRepository);
         }
+        
+        public static XMLSerializer BuildSimpleUnityXMLSerializer()
+        {
+            IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
+            
+            database.Add(typeof(StringArgument), new SerializeXMLIntoStringStrategy());
+            
+            database.Add(typeof(StreamArgument), new SerializeXMLIntoStreamStrategy());
+            database.Add(typeof(TextFileArgument), new SerializeXMLIntoTextFileStrategy());
+            
+            database.Add(typeof(UnityStreamArgument), new UnitySerializeXMLIntoStreamStrategy());
+            database.Add(typeof(UnityTextFileArgument), new UnitySerializeXMLIntoTextFileStrategy());
+            
+            database.Add(typeof(UnityPlayerPrefsArgument), new UnitySerializeXMLIntoPlayerPrefsStrategy());
+            
+            IReadOnlyObjectRepository strategyRepository = RepositoriesFactory.BuildDictionaryObjectRepository(database);
+            
+            return new XMLSerializer(strategyRepository);
+        }
     }
 }

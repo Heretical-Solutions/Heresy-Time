@@ -1,5 +1,5 @@
 using HereticalSolutions.Delegates;
-
+using HereticalSolutions.Persistence;
 using HereticalSolutions.Repositories;
 
 namespace HereticalSolutions.Time.Timers
@@ -9,7 +9,8 @@ namespace HereticalSolutions.Time.Timers
           IRuntimeTimer,
           IRuntimeTimerContext,
           ITimerWithState,
-          ITickable
+          ITickable,
+          IVisitable
     {
         private ITimerStrategy<IRuntimeTimerContext, float> currentStrategy;
 
@@ -196,6 +197,24 @@ namespace HereticalSolutions.Time.Timers
             currentStrategy = strategyRepository.Get(state);
         }
 
+        #endregion
+
+        #region IVisitable
+
+        public bool Accept(ISaveVisitor visitor, out object DTO)
+        {
+            var result = visitor.Save<IRuntimeTimer, RuntimeTimerDTO>(this, out RuntimeTimerDTO runtimeTimerDTO);
+
+            DTO = runtimeTimerDTO;
+
+            return result;
+        }
+
+        public bool Accept(ILoadVisitor visitor, object DTO)
+        {
+            return visitor.Load<IRuntimeTimer, RuntimeTimerDTO>((RuntimeTimerDTO)DTO, this);
+        }
+        
         #endregion
     }
 }

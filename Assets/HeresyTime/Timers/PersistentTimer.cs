@@ -210,14 +210,18 @@ namespace HereticalSolutions.Time.Timers
 
         #region IVisitable
         
-        public void Accept(ISaveVisitor visitor)
+        public bool Accept(ISaveVisitor visitor, out object DTO)
         {
-            //visitor.Save<IPersistentTimer, PersistentTimerDTO>(this, out PersistentTimerDTO dto);
+            var result = visitor.Save<IPersistentTimer, PersistentTimerDTO>(this, out PersistentTimerDTO persistentTimerDTO);
+
+            DTO = persistentTimerDTO;
+
+            return result;
         }
 
-        public void Accept(ILoadVisitor visitor)
+        public bool Accept(ILoadVisitor visitor, object DTO)
         {
-            //visitor.Load<IPersistentTimer, PersistentTimerDTO>(PersistentTimerDTO dto);
+            return visitor.Load<IPersistentTimer, PersistentTimerDTO>((PersistentTimerDTO)DTO, this);
         }
         
         #endregion

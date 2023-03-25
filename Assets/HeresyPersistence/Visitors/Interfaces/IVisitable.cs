@@ -2,8 +2,8 @@ namespace HereticalSolutions.Persistence
 {
     public interface IVisitable
     {
-        void Accept(ISaveVisitor visitor);
+        bool Accept(ISaveVisitor visitor, out object DTO);
         
-        void Accept(ILoadVisitor visitor);
+        bool Accept(ILoadVisitor visitor, object DTO);
     }
 }

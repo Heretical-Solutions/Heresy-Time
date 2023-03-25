@@ -38,7 +38,28 @@ namespace HereticalSolutions.Time.Visitors
 
             return true;
         }
-        
+
+        public bool Load(
+            PersistentTimerDTO DTO,
+            IPersistentTimer valueToPopulate)
+        {
+            ((ITimerWithState)valueToPopulate).SetState(DTO.State);
+
+            ((IPersistentTimerContext)valueToPopulate).StartTime = DTO.StartTime;
+            
+            ((IPersistentTimerContext)valueToPopulate).EstimatedFinishTime = DTO.EstimatedFinishTime;
+            
+            ((IPersistentTimerContext)valueToPopulate).SavedProgress = DTO.SavedProgress;
+
+            ((IPersistentTimerContext)valueToPopulate).CurrentDurationSpan = DTO.CurrentDurationSpan;
+            
+            valueToPopulate.Accumulate = DTO.Accumulate;
+
+            valueToPopulate.Repeat = DTO.Repeat;
+
+            return true;
+        }
+
         #endregion
 
         #region ILoadVisitor
@@ -72,6 +93,25 @@ namespace HereticalSolutions.Time.Visitors
                 : default(TValue);
 
             return result;
+        }
+
+        public bool Load<TValue>(object DTO, TValue valueToPopulate)
+        {
+            if (!(DTO.GetType().Equals(typeof(PersistentTimerDTO))))
+                throw new Exception($"[PersistentTimerVisitor] INVALID ARGUMENT TYPE. EXPECTED: \"{typeof(PersistentTimerDTO).ToString()}\" RECEIVED: \"{DTO.GetType().ToString()}\"");
+            
+            return Load((PersistentTimerDTO)DTO, (IPersistentTimer)valueToPopulate);
+        }
+
+        public bool Load<TValue, TDTO>(TDTO DTO, TValue valueToPopulate)
+        {
+            if (!(typeof(TDTO).Equals(typeof(PersistentTimerDTO))))
+                throw new Exception($"[PersistentTimerVisitor] INVALID ARGUMENT TYPE. EXPECTED: \"{typeof(PersistentTimerDTO).ToString()}\" RECEIVED: \"{typeof(TDTO).ToString()}\"");
+            
+            //DIRTY HACKS DO NOT REPEAT
+            var dtoObject = (object)DTO;
+            
+            return Load((PersistentTimerDTO)dtoObject, (IPersistentTimer)valueToPopulate);
         }
 
         #endregion

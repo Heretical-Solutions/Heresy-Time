@@ -74,7 +74,27 @@ namespace HereticalSolutions.Persistence.Visitors
 
             return concreteVisitor.Load(DTO, out value);
         }
-        
+
+        public bool Load<TValue>(object DTO, TValue valueToPopulate)
+        {
+            if (!loadVisitorsRepository.TryGet(typeof(TValue), out object concreteVisitorObject))
+                throw new Exception($"[CompositeVisitor] COULD NOT FIND CONCRETE VISITOR FOR VALUE TYPE \"{typeof(TValue).ToString()}\"");
+            
+            var concreteVisitor = (ILoadVisitor)concreteVisitorObject;
+
+            return concreteVisitor.Load(DTO, valueToPopulate);
+        }
+
+        public bool Load<TValue, TDTO>(TDTO DTO, TValue valueToPopulate)
+        {
+            if (!loadVisitorsRepository.TryGet(typeof(TValue), out object concreteVisitorObject))
+                throw new Exception($"[CompositeVisitor] COULD NOT FIND CONCRETE VISITOR FOR VALUE TYPE \"{typeof(TValue).ToString()}\" AND DTO TYPE \"{typeof(TDTO).ToString()}\"");
+            
+            var concreteVisitor = (ILoadVisitorGeneric<TValue, TDTO>)concreteVisitorObject;
+
+            return concreteVisitor.Load(DTO, valueToPopulate);
+        }
+
         #endregion
     }
 }

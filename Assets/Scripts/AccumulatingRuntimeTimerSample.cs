@@ -73,9 +73,13 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
 
     private void Save()
     {
-        saveVisitor.Save<IRuntimeTimer, RuntimeTimerDTO>(runtimeTimer, out RuntimeTimerDTO dto);
+        //saveVisitor.Save<IRuntimeTimer, RuntimeTimerDTO>(runtimeTimer, out RuntimeTimerDTO dto);
 
-        serializer.Serialize<RuntimeTimerDTO>(textFileArgument, dto);
+        //serializer.Serialize<RuntimeTimerDTO>(textFileArgument, dto);
+        
+        ((IVisitable)runtimeTimer).Accept(saveVisitor, out var dto);
+        
+        serializer.Serialize(textFileArgument, dto);
         
         var timeProgress = runtimeTimer.TimeElapsed;
         

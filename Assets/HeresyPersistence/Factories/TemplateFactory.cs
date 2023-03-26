@@ -49,5 +49,19 @@ namespace HereticalSolutions.Persistence.Factories
             
             return new XMLSerializer(strategyRepository);
         }
+        
+        public static YAMLSerializer BuildSimpleYAMLSerializer()
+        {
+            IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
+            
+            database.Add(typeof(StringArgument), new SerializeYamlIntoStringStrategy());
+            
+            database.Add(typeof(StreamArgument), new SerializeYamlIntoStreamStrategy());
+            database.Add(typeof(TextFileArgument), new SerializeYamlIntoTextFileStrategy());
+            
+            IReadOnlyObjectRepository strategyRepository = RepositoriesFactory.BuildDictionaryObjectRepository(database);
+            
+            return new YAMLSerializer(strategyRepository);
+        }
     }
 }

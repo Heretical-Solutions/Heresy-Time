@@ -3,10 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="771f4e40-d3b2-469b-abfd-3b0bdf3edf80" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Heresy Time/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Heresy Time/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/JSON/JSONSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/JSON/JSONSerializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Factories/TemplateFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Factories/TemplateFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Factories/TemplateFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Factories/TemplateFactory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AccumulatingPersistentTimerSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AccumulatingPersistentTimerSample.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AccumulatingRuntimeTimerSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AccumulatingRuntimeTimerSample.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/PersistentJsonFSSettings.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/PersistentJsonFSSettings.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/PersistentXMLFSSettings.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/PersistentXMLFSSettings.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/RuntimeJsonFSSettings.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/RuntimeJsonFSSettings.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/RuntimeXMLFSSettings.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/RuntimeXMLFSSettings.asset.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,23 +45,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Discover.Launch.Via.Unity": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "XThreadsFramesViewSplitterKey": "0.5008606",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\divanilov\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\divanilov\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\divanilov\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\divanilov\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\divanilov\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\divanilov\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\LoremIpsum\Engines\Unity\Editors\2021.3.16f1\Editor\Unity.exe" />
@@ -104,7 +114,7 @@
       <workItem from="1678850120980" duration="25078000" />
       <workItem from="1679221300218" duration="1894000" />
       <workItem from="1679547152012" duration="32955000" />
-      <workItem from="1679758279675" duration="9924000" />
+      <workItem from="1679758279675" duration="13745000" />
     </task>
     <servers />
   </component>

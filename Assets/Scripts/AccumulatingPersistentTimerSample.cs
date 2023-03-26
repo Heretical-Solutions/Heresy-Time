@@ -13,10 +13,16 @@ using UnityEngine;
 public class AccumulatingPersistentTimerSample : MonoBehaviour
 {
     [SerializeField]
+    private UnityFileSystemSettings binFSSettings;
+    
+    [SerializeField]
     private UnityFileSystemSettings jsonFSSettings;
 
     [SerializeField]
     private UnityFileSystemSettings xmlFSSettings;
+    
+    [SerializeField]
+    private UnityFileSystemSettings yamlFSSettings;
     
     [SerializeField]
     private float autosaveCooldown = 5f;
@@ -40,14 +46,22 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
     private ILoadVisitor loadVisitor;
 
     //Serializers
+    private ISerializer binarySerializer;
+    
     private ISerializer jsonSerializer;
     
     private ISerializer xmlSerializer;
+    
+    private ISerializer yamlSerializer;
 
     //Arguments
+    private UnityStreamArgument binaryStreamArgument;
+    
     private UnityTextFileArgument jsonTextFileArgument;
     
     private UnityTextFileArgument xmlTextFileArgument;
+    
+    private UnityTextFileArgument yamlTextFileArgument;
 
     //Countdowns
     private float countdown;
@@ -74,11 +88,19 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
         loadVisitor = visitor;
 
         //Initialize serializers
+        binarySerializer = PersistenceFactory.BuildSimpleUnityBinarySerializer();
+        
         jsonSerializer = PersistenceFactory.BuildSimpleUnityJSONSerializer();
 
         xmlSerializer = PersistenceFactory.BuildSimpleUnityXMLSerializer();
+        
+        yamlSerializer = PersistenceFactory.BuildSimpleUnityYAMLSerializer();
 
         //Initialize arguments
+        binaryStreamArgument = new UnityStreamArgument();
+
+        binaryStreamArgument.Settings = binFSSettings;
+        
         jsonTextFileArgument = new UnityTextFileArgument();
 
         jsonTextFileArgument.Settings = jsonFSSettings;
@@ -86,6 +108,10 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
         xmlTextFileArgument = new UnityTextFileArgument();
 
         xmlTextFileArgument.Settings = xmlFSSettings;
+        
+        yamlTextFileArgument = new UnityTextFileArgument();
+
+        yamlTextFileArgument.Settings = yamlFSSettings;
 
         //Initialize countdown
         countdown = autosaveCooldown;
@@ -132,13 +158,20 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
 
     private void Save()
     {
+        //Visit
         persistentTimerAsVisitable.Accept(saveVisitor, out var dto);
+        
+        //Serialize
+        binarySerializer.Serialize(binaryStreamArgument, persistentTimerAsVisitable.DTOType, dto);
         
         jsonSerializer.Serialize(jsonTextFileArgument, persistentTimerAsVisitable.DTOType, dto);
 
         xmlSerializer.Serialize(xmlTextFileArgument, persistentTimerAsVisitable.DTOType, dto);
+
+        yamlSerializer.Serialize(yamlTextFileArgument, persistentTimerAsVisitable.DTOType, dto);
         
         
+        //Debug
         var timeProgress = ((IPersistentTimerContext)persistentTimer).SavedProgress;
         
         Debug.Log($"[AccumulatingPersistentTimerSample] ACCUMULATING PERSISTENT TIMER SERIALIZED. PROGRESS: HOURS: {timeProgress.Hours.ToString()} MINUTES: {timeProgress.Minutes.ToString()} SECONDS: {timeProgress.Seconds.ToString()}");
@@ -148,20 +181,43 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
     {
         object dto;
         
-        bool json = UnityEngine.Random.Range(0f, 1f) > 0.5f;
+        //Roll deserialization method
+        float roll = UnityEngine.Random.Range(0f, 1f);
 
-        if (json)
-            jsonSerializer.Deserialize(jsonTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
-        else
-            xmlSerializer.Deserialize(xmlTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
+        bool deserialized;
         
+        if (roll < 0.25f) //BINARY
+            deserialized = binarySerializer.Deserialize(binaryStreamArgument, persistentTimerAsVisitable.DTOType,  out dto);
+        else if (roll < 0.5f) //JSON
+            deserialized = jsonSerializer.Deserialize(jsonTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
+        else if (roll < 0.75f) //XML
+            deserialized = xmlSerializer.Deserialize(xmlTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
+        else //YAML
+            deserialized = yamlSerializer.Deserialize(yamlTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
+        
+        if (!deserialized)
+            return false;
+        
+        //Visit
         bool result = persistentTimerAsVisitable.Accept(loadVisitor, dto);
 
+        //Debug
         if (result)
         {
             var timeProgress = ((IPersistentTimerContext)persistentTimer).SavedProgress;
 
-            Debug.Log($"[AccumulatingPersistentTimerSample] ACCUMULATING PERSISTENT TIMER DESERIALIZED. METHOD: \"{(json ? "JSON" : "XML")}\" PROGRESS: HOURS: {timeProgress.Hours.ToString()} MINUTES: {timeProgress.Minutes.ToString()} SECONDS: {timeProgress.Seconds.ToString()}");
+            string methodRolled = string.Empty;
+
+            if (roll < 0.25f) //BINARY
+                methodRolled = "binary";
+            else if (roll < 0.5f) //JSON
+                methodRolled = "JSON";
+            else if (roll < 0.75f) //XML
+                methodRolled = "XML";
+            else //YAML
+                methodRolled = "YAML";
+            
+            Debug.Log($"[AccumulatingPersistentTimerSample] ACCUMULATING PERSISTENT TIMER DESERIALIZED. METHOD: \"{methodRolled}\" PROGRESS: HOURS: {timeProgress.Hours.ToString()} MINUTES: {timeProgress.Minutes.ToString()} SECONDS: {timeProgress.Seconds.ToString()}");
         }
 
         return result;

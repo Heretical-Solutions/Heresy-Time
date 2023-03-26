@@ -10,6 +10,28 @@ namespace HereticalSolutions.Persistence.Factories
 {
     public static partial class PersistenceFactory
     {
+        public static BinarySerializer BuildSimpleBinarySerializer()
+        {
+            IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
+            
+            database.Add(typeof(StreamArgument), new SerializeBinaryIntoStreamStrategy());
+            
+            IReadOnlyObjectRepository strategyRepository = RepositoriesFactory.BuildDictionaryObjectRepository(database);
+            
+            return new BinarySerializer(strategyRepository);
+        }
+        
+        public static ProtobufSerializer BuildSimpleProtobufSerializer()
+        {
+            IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
+            
+            database.Add(typeof(StreamArgument), new SerializeProtobufIntoStreamStrategy());
+            
+            IReadOnlyObjectRepository strategyRepository = RepositoriesFactory.BuildDictionaryObjectRepository(database);
+            
+            return new ProtobufSerializer(strategyRepository);
+        }
+        
         public static JSONSerializer BuildSimpleJSONSerializer()
         {
             IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
@@ -24,18 +46,6 @@ namespace HereticalSolutions.Persistence.Factories
             return new JSONSerializer(strategyRepository);
         }
 
-        public static BinarySerializer BuildSimpleBinarySerializer()
-        {
-            IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
-            
-            database.Add(typeof(StreamArgument), new SerializeBinaryIntoStreamStrategy());
-            database.Add(typeof(TextFileArgument), new SerializeBinaryIntoTextFileStrategy());
-            
-            IReadOnlyObjectRepository strategyRepository = RepositoriesFactory.BuildDictionaryObjectRepository(database);
-            
-            return new BinarySerializer(strategyRepository);
-        }
-        
         public static XMLSerializer BuildSimpleXMLSerializer()
         {
             IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();

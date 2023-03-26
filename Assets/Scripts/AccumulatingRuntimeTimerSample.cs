@@ -14,6 +14,9 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
     private UnityFileSystemSettings binFSSettings;
     
     [SerializeField]
+    private UnityFileSystemSettings protoFSSettings;
+    
+    [SerializeField]
     private UnityFileSystemSettings jsonFSSettings;
 
     [SerializeField]
@@ -31,6 +34,9 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
     [SerializeField]
     private bool append = false;
     
+    [SerializeField]
+    private float forceDeserializationRoll = -1f;
+    
     //Timers
     private IRuntimeTimer runtimeTimer;
 
@@ -46,6 +52,8 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
     //Serializers
     private ISerializer binarySerializer;
     
+    private ISerializer protobufSerializer;
+    
     private ISerializer jsonSerializer;
     
     private ISerializer xmlSerializer;
@@ -54,6 +62,8 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
 
     //Arguments
     private UnityStreamArgument binaryStreamArgument;
+    
+    private UnityStreamArgument protobufStreamArgument;
     
     private UnityTextFileArgument jsonTextFileArgument;
     
@@ -88,6 +98,8 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
         //Initialize serializers
         binarySerializer = PersistenceFactory.BuildSimpleUnityBinarySerializer();
         
+        protobufSerializer = PersistenceFactory.BuildSimpleUnityProtobufSerializer();
+        
         jsonSerializer = PersistenceFactory.BuildSimpleUnityJSONSerializer();
 
         xmlSerializer = PersistenceFactory.BuildSimpleUnityXMLSerializer();
@@ -98,6 +110,10 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
         binaryStreamArgument = new UnityStreamArgument();
 
         binaryStreamArgument.Settings = binFSSettings;
+        
+        protobufStreamArgument = new UnityStreamArgument();
+
+        protobufStreamArgument.Settings = protoFSSettings;
         
         jsonTextFileArgument = new UnityTextFileArgument();
 
@@ -162,6 +178,9 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
         //Serialize
         binarySerializer.Serialize(binaryStreamArgument, runtimeTimerAsVisitable.DTOType, dto);
         
+        //Skip for timers - no contract defined
+        //protobufSerializer.Serialize(protobufStreamArgument, runtimeTimerAsVisitable.DTOType, dto);
+        
         jsonSerializer.Serialize(jsonTextFileArgument, runtimeTimerAsVisitable.DTOType, dto);
 
         xmlSerializer.Serialize(xmlTextFileArgument, runtimeTimerAsVisitable.DTOType, dto);
@@ -182,13 +201,23 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
         //Roll deserialization method
         float roll = UnityEngine.Random.Range(0f, 1f);
 
+        if (forceDeserializationRoll > 0f)
+            roll = forceDeserializationRoll;
+
         bool deserialized;
         
-        if (roll < 0.25f) //BINARY
+        if (roll < 0.2f) //BINARY
             deserialized = binarySerializer.Deserialize(binaryStreamArgument, runtimeTimerAsVisitable.DTOType,  out dto);
-        else if (roll < 0.5f) //JSON
+        else if (roll < 0.4f) //PROTOBUF
+        {
+            //Skip for timers - no contract defined
+            //deserialized = protobufSerializer.Deserialize(protobufStreamArgument, runtimeTimerAsVisitable.DTOType, out dto);
+
+            return false;
+        }
+        else if (roll < 0.6f) //JSON
             deserialized = jsonSerializer.Deserialize(jsonTextFileArgument, runtimeTimerAsVisitable.DTOType,  out dto);
-        else if (roll < 0.75f) //XML
+        else if (roll < 0.8f) //XML
             deserialized = xmlSerializer.Deserialize(xmlTextFileArgument, runtimeTimerAsVisitable.DTOType,  out dto);
         else //YAML
             deserialized = yamlSerializer.Deserialize(yamlTextFileArgument, runtimeTimerAsVisitable.DTOType,  out dto);
@@ -206,11 +235,13 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
 
             string methodRolled = string.Empty;
 
-            if (roll < 0.25f) //BINARY
+            if (roll < 0.2f) //BINARY
                 methodRolled = "binary";
-            else if (roll < 0.5f) //JSON
+            else if (roll < 0.4f) //PROTOBUF
+                methodRolled = "protobuf";
+            else if (roll < 0.6f) //JSON
                 methodRolled = "JSON";
-            else if (roll < 0.75f) //XML
+            else if (roll < 0.8f) //XML
                 methodRolled = "XML";
             else //YAML
                 methodRolled = "YAML";

@@ -4,18 +4,17 @@
     <list default="true" id="771f4e40-d3b2-469b-abfd-3b0bdf3edf80" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Heresy Time/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Heresy Time/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Factories/TemplateFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Factories/TemplateFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/BinarySerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/BinarySerializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/Strategies/SerializeBinaryIntoTextFileStrategy.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/Strategies/SerializeBinaryIntoTextFileStrategy.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Factories/TemplateFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Factories/TemplateFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/Binary/Strategies/UnitySerializeBinaryIntoTextFileStrategy.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/Binary/Strategies/UnitySerializeBinaryIntoTextFileStrategy.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AccumulatingPersistentTimerSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AccumulatingPersistentTimerSample.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AccumulatingRuntimeTimerSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AccumulatingRuntimeTimerSample.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/PersistentJsonFSSettings.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/PersistentJsonFSSettings.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/PersistentXMLFSSettings.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/PersistentXMLFSSettings.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/RuntimeJsonFSSettings.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/RuntimeJsonFSSettings.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/RuntimeXMLFSSettings.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/RuntimeXMLFSSettings.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +113,7 @@
       <workItem from="1678850120980" duration="25078000" />
       <workItem from="1679221300218" duration="1894000" />
       <workItem from="1679547152012" duration="32955000" />
-      <workItem from="1679758279675" duration="13745000" />
+      <workItem from="1679758279675" duration="18100000" />
     </task>
     <servers />
   </component>

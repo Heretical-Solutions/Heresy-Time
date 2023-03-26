@@ -10,6 +10,32 @@ namespace HereticalSolutions.Persistence.Factories
 {
     public static partial class PersistenceFactory
     {
+        public static BinarySerializer BuildSimpleUnityBinarySerializer()
+        {
+            IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
+            
+            database.Add(typeof(StreamArgument), new SerializeBinaryIntoStreamStrategy());
+            
+            database.Add(typeof(UnityStreamArgument), new UnitySerializeBinaryIntoStreamStrategy());
+            
+            IReadOnlyObjectRepository strategyRepository = RepositoriesFactory.BuildDictionaryObjectRepository(database);
+            
+            return new BinarySerializer(strategyRepository);
+        }
+        
+        public static ProtobufSerializer BuildSimpleUnityProtobufSerializer()
+        {
+            IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
+            
+            database.Add(typeof(StreamArgument), new SerializeProtobufIntoStreamStrategy());
+            
+            database.Add(typeof(UnityStreamArgument), new UnitySerializeProtobufIntoStreamStrategy());
+            
+            IReadOnlyObjectRepository strategyRepository = RepositoriesFactory.BuildDictionaryObjectRepository(database);
+            
+            return new ProtobufSerializer(strategyRepository);
+        }
+        
         public static JSONSerializer BuildSimpleUnityJSONSerializer()
         {
             IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
@@ -29,21 +55,6 @@ namespace HereticalSolutions.Persistence.Factories
             return new JSONSerializer(strategyRepository);
         }
 
-        public static BinarySerializer BuildSimpleUnityBinarySerializer()
-        {
-            IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
-            
-            database.Add(typeof(StreamArgument), new SerializeBinaryIntoStreamStrategy());
-            database.Add(typeof(TextFileArgument), new SerializeBinaryIntoTextFileStrategy());
-            
-            database.Add(typeof(UnityStreamArgument), new UnitySerializeBinaryIntoStreamStrategy());
-            database.Add(typeof(UnityTextFileArgument), new UnitySerializeBinaryIntoTextFileStrategy());
-            
-            IReadOnlyObjectRepository strategyRepository = RepositoriesFactory.BuildDictionaryObjectRepository(database);
-            
-            return new BinarySerializer(strategyRepository);
-        }
-        
         public static XMLSerializer BuildSimpleUnityXMLSerializer()
         {
             IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();

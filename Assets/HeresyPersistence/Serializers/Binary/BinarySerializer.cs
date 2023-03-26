@@ -67,7 +67,7 @@ namespace HereticalSolutions.Persistence.Serializers
 			if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
 				throw new Exception($"[BinarySerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
 
-			var concreteStrategy = (IJsonSerializationStrategy)strategyObject;
+			var concreteStrategy = (IBinarySerializationStrategy)strategyObject;
 			
 			concreteStrategy.Erase(argument);
 		}

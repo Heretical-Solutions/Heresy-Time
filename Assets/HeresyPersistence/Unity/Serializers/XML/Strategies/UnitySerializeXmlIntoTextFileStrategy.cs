@@ -6,7 +6,7 @@ using HereticalSolutions.Persistence.IO;
 
 namespace HereticalSolutions.Persistence.Serializers
 {
-    public class UnitySerializeXMLIntoTextFileStrategy : IXMLSerializationStrategy
+    public class UnitySerializeXmlIntoTextFileStrategy : IXmlSerializationStrategy
     {
         public bool Serialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, TValue value)
         {

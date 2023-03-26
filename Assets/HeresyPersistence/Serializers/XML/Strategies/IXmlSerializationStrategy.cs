@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace HereticalSolutions.Persistence.Serializers
 {
-    public interface IXMLSerializationStrategy
+    public interface IXmlSerializationStrategy
     {
         bool Serialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, TValue value);
         

@@ -1,5 +1,4 @@
 using System.IO;
-using System.Text;
 using System.Xml.Serialization;
 
 using HereticalSolutions.Persistence.Arguments;
@@ -7,21 +6,18 @@ using HereticalSolutions.Persistence.IO;
 
 namespace HereticalSolutions.Persistence.Serializers
 {
-    public class SerializeXMLIntoStreamStrategy : IXMLSerializationStrategy
+    public class SerializeXmlIntoStreamStrategy : IXmlSerializationStrategy
     {
         public bool Serialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, TValue value)
         {
             FileSystemSettings fileSystemSettings = ((StreamArgument)argument).Settings;
             
-            if (!StreamIO.OpenWriteStream(fileSystemSettings, out var fileStream))
+            if (!StreamIO.OpenWriteStream(fileSystemSettings, out StreamWriter streamWriter))
                 return false;
             
-            using (var streamWriter = new StreamWriter(fileStream))
-            {
-                serializer.Serialize(streamWriter, value);
-            }
+            serializer.Serialize(streamWriter, value);
             
-            StreamIO.CloseStream(fileStream);
+            StreamIO.CloseStream(streamWriter);
 
             return true;
         }
@@ -32,15 +28,12 @@ namespace HereticalSolutions.Persistence.Serializers
 
             value = default(TValue);
             
-            if (!StreamIO.OpenReadStream(fileSystemSettings, out var fileStream))
+            if (!StreamIO.OpenReadStream(fileSystemSettings, out StreamReader streamReader))
                 return false;
 
-            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
-            {
-                value = (TValue)serializer.Deserialize(streamReader);
-            }
+            value = (TValue)serializer.Deserialize(streamReader);
             
-            StreamIO.CloseStream(fileStream);
+            StreamIO.CloseStream(streamReader);
 
             return true;
         }

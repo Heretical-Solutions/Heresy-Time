@@ -2,19 +2,62 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="771f4e40-d3b2-469b-abfd-3b0bdf3edf80" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/CSVSerializer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/CSVSerializer.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/ICsvSerializationStrategy.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/ICsvSerializationStrategy.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/SerializeCsvIntoStreamStrategy.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/SerializeCsvIntoStreamStrategy.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/SerializeCsvIntoStringStrategy.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/SerializeCsvIntoStringStrategy.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/SerializeCsvIntoTextFileStrategy.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/SerializeCsvIntoTextFileStrategy.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/IXmlSerializationStrategy.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXmlIntoStreamStrategy.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXmlIntoStringStrategy.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXmlIntoTextFileStrategy.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXmlIntoPlayerPrefsStrategy.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXmlIntoStreamStrategy.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXmlIntoTextFileStrategy.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Packages/CsvHelper.30.0.1.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Packages/CsvHelper.30.0.1/.signature.p7s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Packages/CsvHelper.30.0.1/CsvHelper.30.0.1.nupkg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Packages/CsvHelper.30.0.1/CsvHelper.30.0.1.nupkg.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Packages/CsvHelper.30.0.1/Icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Packages/CsvHelper.30.0.1/Icon.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Packages/CsvHelper.30.0.1/lib.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Packages/CsvHelper.30.0.1/lib/netstandard2.1.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Packages/CsvHelper.30.0.1/lib/netstandard2.1/CsvHelper.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Packages/CsvHelper.30.0.1/lib/netstandard2.1/CsvHelper.dll.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Packages/CsvHelper.30.0.1/lib/netstandard2.1/CsvHelper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Packages/CsvHelper.30.0.1/lib/netstandard2.1/CsvHelper.xml.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Heresy Time/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Heresy Time/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Factories/TemplateFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Factories/TemplateFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/BinarySerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/BinarySerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/Strategies/SerializeBinaryIntoTextFileStrategy.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/Strategies/SerializeBinaryIntoTextFileStrategy.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Input Output/StreamIO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Input Output/StreamIO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/Strategies/SerializeBinaryIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/Strategies/SerializeBinaryIntoStreamStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/JSON/Strategies/SerializeJsonIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/JSON/Strategies/SerializeJsonIntoStreamStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Protobuf/Strategies/SerializeProtobufIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Protobuf/Strategies/SerializeProtobufIntoStreamStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/IXMLSerializationStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/IXmlSerializationStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/IXMLSerializationStrategy.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXMLIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXmlIntoStreamStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXMLIntoStreamStrategy.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXMLIntoStringStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXmlIntoStringStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXMLIntoStringStrategy.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXMLIntoTextFileStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXmlIntoTextFileStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXMLIntoTextFileStrategy.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/XMLSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/XMLSerializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/YAML/Strategies/SerializeYamlIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/YAML/Strategies/SerializeYamlIntoStreamStrategy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Factories/TemplateFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Factories/TemplateFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/Binary/Strategies/UnitySerializeBinaryIntoTextFileStrategy.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/Binary/Strategies/UnitySerializeBinaryIntoTextFileStrategy.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AccumulatingPersistentTimerSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AccumulatingPersistentTimerSample.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AccumulatingRuntimeTimerSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AccumulatingRuntimeTimerSample.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXMLIntoPlayerPrefsStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXmlIntoPlayerPrefsStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXMLIntoPlayerPrefsStrategy.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXMLIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXmlIntoStreamStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXMLIntoStreamStrategy.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXMLIntoTextFileStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXmlIntoTextFileStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXMLIntoTextFileStrategy.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/packages.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +67,18 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/HeresyTime/Persistence/Visitors/PersistentTimerVisitor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AccumulatingPersistentTimerSample.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.github-glitchenzo.nugetforunity@e6f3f800b0/Editor/NugetConfigFile.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.github-glitchenzo.nugetforunity@e6f3f800b0/Editor/NugetHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.github-glitchenzo.nugetforunity@e6f3f800b0/Editor/NugetPackageIdentifier.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.github-glitchenzo.nugetforunity@e6f3f800b0/Editor/NugetPreferences.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.github-glitchenzo.nugetforunity@e6f3f800b0/Editor/NugetWindow.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.github-glitchenzo.nugetforunity@e6f3f800b0/Editor/NuspecEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.github-glitchenzo.nugetforunity@e6f3f800b0/Editor/TargetFrameworkResolver.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.github-glitchenzo.nugetforunity@e6f3f800b0/Editor/UnityPreImportedLibraryResolver.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.8.2/Tests/Runtime/PlaymodeTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.8.2/Tests/Runtime/Shared/031-Pointers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.8.2/Tests/Runtime/Shared/035-Functions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.8.2/Tests/Runtime/Shared/060-TestEnums.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Button.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/CanvasUpdateRegistry.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Layout/LayoutUtility.cs" root0="SKIP_HIGHLIGHTING" />
@@ -34,6 +87,11 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Canvas/NestedCanvas.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Temp/JsonSerializer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Temp/SerializationSettings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3bf68475a252f3424de988fe2cea3666ed6a97aba1978057fda7614ef5a3/CsvWriter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/afbf15ffe1d246139ee6c2134f885f72f33af443adbbbc75353ea8d178c1915/System.Runtime.Serialization.Formatters.Binary.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b8367264a05acd301ea13989be34e562f187b81979f7a9c95b691302772dc/CsvReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d8f43e73b82308c1e37f3cbb0fad9f777a8c194762a21d7d7ea34b48b9c542c/Serializer.Serialize.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ffe351aa6232372f4a3b8c3ff36a636f33de226f60e607acbfe569289d7289d/System.IO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Downloads/GameSaveManager.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -113,7 +171,7 @@
       <workItem from="1678850120980" duration="25078000" />
       <workItem from="1679221300218" duration="1894000" />
       <workItem from="1679547152012" duration="32955000" />
-      <workItem from="1679758279675" duration="18100000" />
+      <workItem from="1679758279675" duration="23867000" />
     </task>
     <servers />
   </component>

@@ -5,7 +5,7 @@ using HereticalSolutions.Persistence.Arguments;
 
 namespace HereticalSolutions.Persistence.Serializers
 {
-    public class SerializeXMLIntoStringStrategy : IXMLSerializationStrategy
+    public class SerializeXmlIntoStringStrategy : IXmlSerializationStrategy
     {
         public bool Serialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, TValue value)
         {

@@ -12,14 +12,12 @@ namespace HereticalSolutions.Persistence.Serializers
         {
             FileSystemSettings fileSystemSettings = ((StreamArgument)argument).Settings;
             
-            if (!StreamIO.OpenWriteStream(fileSystemSettings, out var fileStream))
+            if (!StreamIO.OpenWriteStream(fileSystemSettings, out StreamWriter streamWriter))
                 return false;
             
-            byte[] data = new UTF8Encoding(true).GetBytes(yaml);
+            streamWriter.Write(yaml);
             
-            fileStream.Write(data, 0, data.Length);
-            
-            StreamIO.CloseStream(fileStream);
+            StreamIO.CloseStream(streamWriter);
 
             return true;
         }
@@ -30,14 +28,12 @@ namespace HereticalSolutions.Persistence.Serializers
             
             yaml = string.Empty;
             
-            if (!StreamIO.OpenReadStream(fileSystemSettings, out var fileStream))
+            if (!StreamIO.OpenReadStream(fileSystemSettings, out StreamReader streamReader))
                 return false;
             
-            var streamReader = new StreamReader(fileStream, Encoding.UTF8);
-
             yaml = streamReader.ReadToEnd();
             
-            StreamIO.CloseStream(fileStream);
+            StreamIO.CloseStream(streamReader);
 
             return true;
         }

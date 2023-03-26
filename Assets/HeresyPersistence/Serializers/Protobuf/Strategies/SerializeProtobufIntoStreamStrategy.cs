@@ -1,3 +1,5 @@
+using System.IO;
+
 using HereticalSolutions.Persistence.Arguments;
 using HereticalSolutions.Persistence.IO;
 
@@ -11,7 +13,7 @@ namespace HereticalSolutions.Persistence.Serializers
         {
             FileSystemSettings fileSystemSettings = ((StreamArgument)argument).Settings;
             
-            if (!StreamIO.OpenWriteStream(fileSystemSettings, out var fileStream))
+            if (!StreamIO.OpenWriteStream(fileSystemSettings, out FileStream fileStream))
                 return false;
             
             ProtobufInternalSerializer.Serialize(fileStream, value);
@@ -27,7 +29,7 @@ namespace HereticalSolutions.Persistence.Serializers
             
             value = default(TValue);
             
-            if (!StreamIO.OpenReadStream(fileSystemSettings, out var fileStream))
+            if (!StreamIO.OpenReadStream(fileSystemSettings, out FileStream fileStream))
                 return false;
             
             value = ProtobufInternalSerializer.Deserialize<TValue>(fileStream);

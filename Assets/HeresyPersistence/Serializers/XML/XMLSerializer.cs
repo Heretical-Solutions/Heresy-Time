@@ -24,7 +24,7 @@ namespace HereticalSolutions.Persistence.Serializers
             if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
                 throw new Exception($"[XMLSerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
 
-            var concreteStrategy = (IXMLSerializationStrategy)strategyObject;
+            var concreteStrategy = (IXmlSerializationStrategy)strategyObject;
 
             return concreteStrategy.Serialize<TValue>(argument, serializer, DTO);
         }
@@ -36,7 +36,7 @@ namespace HereticalSolutions.Persistence.Serializers
             if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
                 throw new Exception($"[XMLSerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
 
-            var concreteStrategy = (IXMLSerializationStrategy)strategyObject;
+            var concreteStrategy = (IXmlSerializationStrategy)strategyObject;
 
             return concreteStrategy.Serialize(argument, serializer, DTO);
         }
@@ -48,7 +48,7 @@ namespace HereticalSolutions.Persistence.Serializers
             if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
                 throw new Exception($"[XMLSerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
 
-            var concreteStrategy = (IXMLSerializationStrategy)strategyObject;
+            var concreteStrategy = (IXmlSerializationStrategy)strategyObject;
 
             var serializer = new XmlSerializer(typeof(TValue));
             
@@ -62,7 +62,7 @@ namespace HereticalSolutions.Persistence.Serializers
             if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
                 throw new Exception($"[XMLSerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
 
-            var concreteStrategy = (IXMLSerializationStrategy)strategyObject;
+            var concreteStrategy = (IXmlSerializationStrategy)strategyObject;
 
             var serializer = new XmlSerializer(DTOType);
             
@@ -74,7 +74,7 @@ namespace HereticalSolutions.Persistence.Serializers
             if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
                 throw new Exception($"[XMLSerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
 
-            var concreteStrategy = (IXMLSerializationStrategy)strategyObject;
+            var concreteStrategy = (IXmlSerializationStrategy)strategyObject;
 			
             concreteStrategy.Erase(argument);
         }

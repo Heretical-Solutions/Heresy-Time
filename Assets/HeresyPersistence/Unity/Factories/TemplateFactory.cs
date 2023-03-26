@@ -59,15 +59,15 @@ namespace HereticalSolutions.Persistence.Factories
         {
             IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
             
-            database.Add(typeof(StringArgument), new SerializeXMLIntoStringStrategy());
+            database.Add(typeof(StringArgument), new SerializeXmlIntoStringStrategy());
             
-            database.Add(typeof(StreamArgument), new SerializeXMLIntoStreamStrategy());
-            database.Add(typeof(TextFileArgument), new SerializeXMLIntoTextFileStrategy());
+            database.Add(typeof(StreamArgument), new SerializeXmlIntoStreamStrategy());
+            database.Add(typeof(TextFileArgument), new SerializeXmlIntoTextFileStrategy());
             
-            database.Add(typeof(UnityStreamArgument), new UnitySerializeXMLIntoStreamStrategy());
-            database.Add(typeof(UnityTextFileArgument), new UnitySerializeXMLIntoTextFileStrategy());
+            database.Add(typeof(UnityStreamArgument), new UnitySerializeXmlIntoStreamStrategy());
+            database.Add(typeof(UnityTextFileArgument), new UnitySerializeXmlIntoTextFileStrategy());
             
-            database.Add(typeof(UnityPlayerPrefsArgument), new UnitySerializeXMLIntoPlayerPrefsStrategy());
+            database.Add(typeof(UnityPlayerPrefsArgument), new UnitySerializeXmlIntoPlayerPrefsStrategy());
             
             IReadOnlyObjectRepository strategyRepository = RepositoriesFactory.BuildDictionaryObjectRepository(database);
             

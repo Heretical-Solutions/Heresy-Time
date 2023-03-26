@@ -2,16 +2,15 @@ using System.IO;
 using System.Xml.Serialization;
 
 using HereticalSolutions.Persistence.Arguments;
-
-using UnityEngine;
+using HereticalSolutions.Persistence.IO;
 
 namespace HereticalSolutions.Persistence.Serializers
 {
-    public class UnitySerializeXMLIntoPlayerPrefsStrategy : IXMLSerializationStrategy
+    public class SerializeXmlIntoTextFileStrategy : IXmlSerializationStrategy
     {
         public bool Serialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, TValue value)
         {
-            string prefsKey = ((UnityPlayerPrefsArgument)argument).PrefsKey;
+            FileSystemSettings fileSystemSettings = ((TextFileArgument)argument).Settings;
 
             string xml;
             
@@ -22,38 +21,33 @@ namespace HereticalSolutions.Persistence.Serializers
                 xml = stringWriter.ToString();
             }
             
-            PlayerPrefs.SetString(prefsKey, xml);
-            
-            PlayerPrefs.Save();
-            
-            return true;
+            return TextFileIO.Write(fileSystemSettings, xml);
         }
 
         public bool Deserialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, out TValue value)
         {
-            string prefsKey = ((UnityPlayerPrefsArgument)argument).PrefsKey;
+            FileSystemSettings fileSystemSettings = ((TextFileArgument)argument).Settings;
 
             value = default(TValue);
+            
+            bool result = TextFileIO.Read(fileSystemSettings, out string xml);
 
-            if (!PlayerPrefs.HasKey(prefsKey))
+            if (!result)
                 return false;
             
-            using (StringReader stringReader = new StringReader(PlayerPrefs.GetString(prefsKey)))
+            using (StringReader stringReader = new StringReader(xml))
             {
                 value = (TValue)serializer.Deserialize(stringReader);
             }
-            
+
             return true;
         }
         
         public void Erase(ISerializationArgument argument)
         {
-            string prefsKey = ((UnityPlayerPrefsArgument)argument).PrefsKey;
+            FileSystemSettings fileSystemSettings = ((TextFileArgument)argument).Settings;
             
-            if (!PlayerPrefs.HasKey(prefsKey))
-                return;
-            
-            PlayerPrefs.DeleteKey(prefsKey);
+            TextFileIO.Erase(fileSystemSettings);
         }
     }
 }

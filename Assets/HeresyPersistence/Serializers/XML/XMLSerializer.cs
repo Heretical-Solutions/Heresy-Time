@@ -29,6 +29,18 @@ namespace HereticalSolutions.Persistence.Serializers
             return concreteStrategy.Serialize<TValue>(argument, serializer, DTO);
         }
 
+        public bool Serialize(ISerializationArgument argument, Type DTOType, object DTO)
+        {
+            var serializer = new XmlSerializer(DTOType);
+            
+            if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
+                throw new Exception($"[XMLSerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
+
+            var concreteStrategy = (IXMLSerializationStrategy)strategyObject;
+
+            return concreteStrategy.Serialize(argument, serializer, DTO);
+        }
+
         public bool Deserialize<TValue>(ISerializationArgument argument, out TValue DTO)
         {
             DTO = default(TValue);
@@ -41,6 +53,20 @@ namespace HereticalSolutions.Persistence.Serializers
             var serializer = new XmlSerializer(typeof(TValue));
             
             return concreteStrategy.Deserialize<TValue>(argument, serializer, out DTO);
+        }
+
+        public bool Deserialize(ISerializationArgument argument, Type DTOType, out object DTO)
+        {
+            DTO = default(object);
+			
+            if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
+                throw new Exception($"[XMLSerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
+
+            var concreteStrategy = (IXMLSerializationStrategy)strategyObject;
+
+            var serializer = new XmlSerializer(DTOType);
+            
+            return concreteStrategy.Deserialize(argument, serializer, out DTO);
         }
 
         public void Erase(ISerializationArgument argument)

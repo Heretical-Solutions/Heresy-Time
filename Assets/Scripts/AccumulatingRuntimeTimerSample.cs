@@ -7,50 +7,76 @@ using HereticalSolutions.Time;
 using HereticalSolutions.Time.Factories;
 
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AccumulatingRuntimeTimerSample : MonoBehaviour
 {
     [SerializeField]
-    private UnityFileSystemSettings fsSettings;
+    private UnityFileSystemSettings jsonFSSettings;
 
+    [SerializeField]
+    private UnityFileSystemSettings xmlFSSettings;
+    
     [SerializeField]
     private float autosaveCooldown = 5f;
 
     [SerializeField]
     private float debugCountdown;
     
+    //Timers
     private IRuntimeTimer runtimeTimer;
 
+    //Visitors
     private ISaveVisitor saveVisitor;
 
-    private ISerializer serializer;
-
-    private UnityTextFileArgument textFileArgument;
+    //Serializers
+    private ISerializer jsonSerializer;
     
+    private ISerializer xmlSerializer;
+
+    //Arguments
+    private UnityTextFileArgument jsonTextFileArgument;
+    
+    private UnityTextFileArgument xmlTextFileArgument;
+    
+    //Countdowns
     private float countdown;
     
     // Start is called before the first frame update
     void Start()
     {
+        //Initialize timers
         runtimeTimer = TimersFactory.BuildRuntimeTimer(
             "AccumulatingPersistentTimer",
             0f);
 
         runtimeTimer.Accumulate = true;
         
+        //Initialize visitors
         saveVisitor = PersistenceFactory.BuildSimpleCompositeVisitorWithTimerVisitors();
 
-        serializer = PersistenceFactory.BuildSimpleUnityJSONSerializer();
+        //Initialize serializers
+        jsonSerializer = PersistenceFactory.BuildSimpleUnityJSONSerializer();
 
-        textFileArgument = new UnityTextFileArgument();
+        xmlSerializer = PersistenceFactory.BuildSimpleUnityXMLSerializer();
+        
+        //Initialize arguments
+        jsonTextFileArgument = new UnityTextFileArgument();
 
-        textFileArgument.Settings = fsSettings;
+        jsonTextFileArgument.Settings = jsonFSSettings;
+        
+        xmlTextFileArgument = new UnityTextFileArgument();
 
+        xmlTextFileArgument.Settings = xmlFSSettings;
+
+        //Initialize countdown
         countdown = autosaveCooldown;
         
         
+        //Start timers
         runtimeTimer.Start();
         
+        //Serialize
         Save();
     }
 
@@ -75,7 +101,9 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
     {
         ((IVisitable)runtimeTimer).Accept(saveVisitor, out var dto);
         
-        serializer.Serialize(textFileArgument, dto);
+        jsonSerializer.Serialize(jsonTextFileArgument, dto);
+
+        xmlSerializer.Serialize(xmlTextFileArgument, ((IVisitable)runtimeTimer).DTOType, dto);
         
         var timeProgress = runtimeTimer.TimeElapsed;
         

@@ -1,3 +1,5 @@
+using System;
+
 using HereticalSolutions.Delegates;
 using HereticalSolutions.Persistence;
 using HereticalSolutions.Repositories;
@@ -201,6 +203,26 @@ namespace HereticalSolutions.Time.Timers
 
         #region IVisitable
 
+        public Type DTOType
+        {
+            get => typeof(RuntimeTimerDTO);
+        }
+        
+        public bool Accept<TDTO>(ISaveVisitor visitor, out TDTO DTO)
+        {
+            if (!(typeof(TDTO).Equals(typeof(RuntimeTimerDTO))))
+                throw new Exception($"[RuntimeTimer] INVALID ARGUMENT TYPE. EXPECTED: \"{typeof(RuntimeTimerDTO).ToString()}\" RECEIVED: \"{typeof(TDTO).ToString()}\"");
+            
+            var result = visitor.Save<IRuntimeTimer, RuntimeTimerDTO>(this, out RuntimeTimerDTO runtimeTimerDTO);
+
+            //DIRTY HACKS DO NOT REPEAT
+            var dtoObject = (object)runtimeTimerDTO;
+            
+            DTO = (TDTO)dtoObject;
+
+            return result;
+        }
+        
         public bool Accept(ISaveVisitor visitor, out object DTO)
         {
             var result = visitor.Save<IRuntimeTimer, RuntimeTimerDTO>(this, out RuntimeTimerDTO runtimeTimerDTO);
@@ -210,6 +232,17 @@ namespace HereticalSolutions.Time.Timers
             return result;
         }
 
+        public bool Accept<TDTO>(ILoadVisitor visitor, TDTO DTO)
+        {
+            if (!(typeof(TDTO).Equals(typeof(RuntimeTimerDTO))))
+                throw new Exception($"[RuntimeTimer] INVALID ARGUMENT TYPE. EXPECTED: \"{typeof(RuntimeTimerDTO).ToString()}\" RECEIVED: \"{typeof(TDTO).ToString()}\"");
+            
+            //DIRTY HACKS DO NOT REPEAT
+            var dtoObject = (object)DTO;
+            
+            return visitor.Load<IRuntimeTimer, RuntimeTimerDTO>((RuntimeTimerDTO)dtoObject, this);
+        }
+        
         public bool Accept(ILoadVisitor visitor, object DTO)
         {
             return visitor.Load<IRuntimeTimer, RuntimeTimerDTO>((RuntimeTimerDTO)DTO, this);

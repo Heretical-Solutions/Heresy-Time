@@ -209,6 +209,26 @@ namespace HereticalSolutions.Time.Timers
         #endregion
 
         #region IVisitable
+
+        public Type DTOType
+        {
+            get => typeof(PersistentTimerDTO);
+        }
+
+        public bool Accept<TDTO>(ISaveVisitor visitor, out TDTO DTO)
+        {
+            if (!(typeof(TDTO).Equals(typeof(PersistentTimerDTO))))
+                throw new Exception($"[PersistentTimer] INVALID ARGUMENT TYPE. EXPECTED: \"{typeof(PersistentTimerDTO).ToString()}\" RECEIVED: \"{typeof(TDTO).ToString()}\"");
+            
+            var result = visitor.Save<IPersistentTimer, PersistentTimerDTO>(this, out PersistentTimerDTO persistentTimerDTO);
+
+            //DIRTY HACKS DO NOT REPEAT
+            var dtoObject = (object)persistentTimerDTO;
+            
+            DTO = (TDTO)dtoObject;
+
+            return result;
+        }
         
         public bool Accept(ISaveVisitor visitor, out object DTO)
         {
@@ -219,6 +239,17 @@ namespace HereticalSolutions.Time.Timers
             return result;
         }
 
+        public bool Accept<TDTO>(ILoadVisitor visitor, TDTO DTO)
+        {
+            if (!(typeof(TDTO).Equals(typeof(PersistentTimerDTO))))
+                throw new Exception($"[PersistentTimer] INVALID ARGUMENT TYPE. EXPECTED: \"{typeof(PersistentTimerDTO).ToString()}\" RECEIVED: \"{typeof(TDTO).ToString()}\"");
+            
+            //DIRTY HACKS DO NOT REPEAT
+            var dtoObject = (object)DTO;
+            
+            return visitor.Load<IPersistentTimer, PersistentTimerDTO>((PersistentTimerDTO)dtoObject, this);
+        }
+        
         public bool Accept(ILoadVisitor visitor, object DTO)
         {
             return visitor.Load<IPersistentTimer, PersistentTimerDTO>((PersistentTimerDTO)DTO, this);

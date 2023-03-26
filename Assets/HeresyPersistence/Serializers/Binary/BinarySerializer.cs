@@ -28,6 +28,16 @@ namespace HereticalSolutions.Persistence.Serializers
 			return concreteStrategy.Serialize<TValue>(argument, formatter, DTO);
 		}
 
+		public bool Serialize(ISerializationArgument argument, Type DTOType, object DTO)
+		{
+			if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
+				throw new Exception($"[BinarySerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
+
+			var concreteStrategy = (IBinarySerializationStrategy)strategyObject;
+
+			return concreteStrategy.Serialize(argument, formatter, DTO);
+		}
+
 		public bool Deserialize<TValue>(ISerializationArgument argument, out TValue DTO)
 		{
 			DTO = default(TValue);
@@ -39,7 +49,19 @@ namespace HereticalSolutions.Persistence.Serializers
 
 			return concreteStrategy.Deserialize<TValue>(argument, formatter, out DTO);
 		}
-		
+
+		public bool Deserialize(ISerializationArgument argument, Type DTOType, out object DTO)
+		{
+			DTO = default(object);
+			
+			if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
+				throw new Exception($"[BinarySerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
+
+			var concreteStrategy = (IBinarySerializationStrategy)strategyObject;
+
+			return concreteStrategy.Deserialize(argument, formatter, out DTO);
+		}
+
 		public void Erase(ISerializationArgument argument)
 		{
 			if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))

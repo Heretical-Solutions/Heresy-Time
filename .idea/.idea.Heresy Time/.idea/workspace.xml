@@ -3,20 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="771f4e40-d3b2-469b-abfd-3b0bdf3edf80" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Heresy Time/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Heresy Time/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/BinarySerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/BinarySerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Interfaces/ISerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Interfaces/ISerializer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/JSON/JSONSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/JSON/JSONSerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/XMLSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/XMLSerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Visitors/Interfaces/IVisitable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Visitors/Interfaces/IVisitable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyTime/Timers/PersistentTimer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyTime/Timers/PersistentTimer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyTime/Timers/RuntimeTimer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyTime/Timers/RuntimeTimer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AccumulatingPersistentTimerSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AccumulatingPersistentTimerSample.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AccumulatingRuntimeTimerSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AccumulatingRuntimeTimerSample.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/PersistentFileSystemSettings.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/PersistentFileSystemSettings.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/RuntimeFileSystemSettings.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/RuntimeFileSystemSettings.asset.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +104,7 @@
       <workItem from="1678850120980" duration="25078000" />
       <workItem from="1679221300218" duration="1894000" />
       <workItem from="1679547152012" duration="32955000" />
-      <workItem from="1679758279675" duration="8239000" />
+      <workItem from="1679758279675" duration="9924000" />
     </task>
     <servers />
   </component>
@@ -125,24 +115,5 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/AccumulatingPersistentTimerSample.cs</url>
-          <line>107</line>
-          <properties documentPath="C:\LoremIpsum\Repositories\Heretical Solutions\Heresy Time\Assets\Scripts\AccumulatingPersistentTimerSample.cs" initialLine="93" containingFunctionPresentation="method 'Save'">
-            <startOffsets>
-              <option value="2628" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2717" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

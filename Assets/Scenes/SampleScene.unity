@@ -156,6 +156,7 @@ MonoBehaviour:
   xmlFSSettings: {fileID: 11400000, guid: bb22eb06e64798342b562f88b9699ea8, type: 2}
   autosaveCooldown: 5
   debugCountdown: 0
+  append: 1
 --- !u!4 &37993513
 Transform:
   m_ObjectHideFlags: 0
@@ -204,6 +205,7 @@ MonoBehaviour:
   xmlFSSettings: {fileID: 11400000, guid: 573e041aaf900854caae6a29fd9e0a70, type: 2}
   autosaveCooldown: 5
   debugCountdown: 0
+  append: 1
 --- !u!4 &283939610
 Transform:
   m_ObjectHideFlags: 0

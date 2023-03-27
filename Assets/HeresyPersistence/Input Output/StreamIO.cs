@@ -44,6 +44,8 @@ namespace HereticalSolutions.Persistence.IO
         {
             string savePath = settings.FullPath;
 
+            EnsureDirectoryExists(savePath);
+            
             dataStream = new FileStream(savePath, FileMode.Create);
 
             return true;
@@ -55,6 +57,8 @@ namespace HereticalSolutions.Persistence.IO
         {
             string savePath = settings.FullPath;
 
+            EnsureDirectoryExists(savePath);
+            
             streamWriter = new StreamWriter(savePath, false, Encoding.UTF8);
 
             return true;
@@ -105,6 +109,22 @@ namespace HereticalSolutions.Persistence.IO
             }
 
             return File.Exists(path);
+        }
+        
+        private static void EnsureDirectoryExists(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                throw new Exception("[TextFileIO] INVALID PATH");
+			
+            string directoryPath = Path.GetDirectoryName(path);
+
+            if (string.IsNullOrEmpty(directoryPath))
+                throw new Exception("[TextFileIO] INVALID DIRECTORY PATH");
+			
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
         }
     }
 }

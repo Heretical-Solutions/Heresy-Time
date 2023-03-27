@@ -4,9 +4,9 @@ namespace HereticalSolutions.Persistence.Serializers
 {
     public interface IBinarySerializationStrategy
     {
-        bool Serialize<TValue>(ISerializationArgument argument, BinaryFormatter formatter, TValue value);
+        bool Serialize(ISerializationArgument argument, BinaryFormatter formatter, object value);
 
-        bool Deserialize<TValue>(ISerializationArgument argument, BinaryFormatter formatter, out TValue value);
+        bool Deserialize(ISerializationArgument argument, BinaryFormatter formatter, out object value);
 
         void Erase(ISerializationArgument argument);
     }

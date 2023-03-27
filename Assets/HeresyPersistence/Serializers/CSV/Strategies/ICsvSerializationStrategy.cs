@@ -1,10 +1,12 @@
+using System;
+
 namespace HereticalSolutions.Persistence.Serializers
 {
     public interface ICsvSerializationStrategy
     {
-        bool Serialize<TValue>(ISerializationArgument argument, TValue value);
+        bool Serialize(ISerializationArgument argument, Type valueType, object value);
         
-        bool Deserialize<TValue>(ISerializationArgument argument, out TValue value);
+        bool Deserialize(ISerializationArgument argument, Type valueType, out object value);
 
         void Erase(ISerializationArgument argument);
     }

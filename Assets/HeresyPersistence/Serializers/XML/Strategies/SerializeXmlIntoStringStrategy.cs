@@ -7,7 +7,7 @@ namespace HereticalSolutions.Persistence.Serializers
 {
     public class SerializeXmlIntoStringStrategy : IXmlSerializationStrategy
     {
-        public bool Serialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, TValue value)
+        public bool Serialize(ISerializationArgument argument, XmlSerializer serializer, object value)
         {
             using (StringWriter stringWriter = new StringWriter())
             {
@@ -19,11 +19,11 @@ namespace HereticalSolutions.Persistence.Serializers
             return true;
         }
 
-        public bool Deserialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, out TValue value)
+        public bool Deserialize(ISerializationArgument argument, XmlSerializer serializer, out object value)
         {
             using (StringReader stringReader = new StringReader(((StringArgument)argument).Value))
             {
-                value = (TValue)serializer.Deserialize(stringReader);
+                value = serializer.Deserialize(stringReader);
             }
             
             return true;

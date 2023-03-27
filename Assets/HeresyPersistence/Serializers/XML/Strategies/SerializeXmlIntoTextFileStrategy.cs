@@ -8,7 +8,7 @@ namespace HereticalSolutions.Persistence.Serializers
 {
     public class SerializeXmlIntoTextFileStrategy : IXmlSerializationStrategy
     {
-        public bool Serialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, TValue value)
+        public bool Serialize(ISerializationArgument argument, XmlSerializer serializer, object value)
         {
             FileSystemSettings fileSystemSettings = ((TextFileArgument)argument).Settings;
 
@@ -24,7 +24,7 @@ namespace HereticalSolutions.Persistence.Serializers
             return TextFileIO.Write(fileSystemSettings, xml);
         }
 
-        public bool Deserialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, out TValue value)
+        public bool Deserialize(ISerializationArgument argument, XmlSerializer serializer, out object value)
         {
             FileSystemSettings fileSystemSettings = ((TextFileArgument)argument).Settings;
 
@@ -32,14 +32,14 @@ namespace HereticalSolutions.Persistence.Serializers
 
             if (!result)
             {
-                value = default(TValue);
+                value = default(object);
                 
                 return false;
             }
 
             using (StringReader stringReader = new StringReader(xml))
             {
-                value = (TValue)serializer.Deserialize(stringReader);
+                value = serializer.Deserialize(stringReader);
             }
 
             return true;

@@ -26,7 +26,7 @@ namespace HereticalSolutions.Persistence.Serializers
 
             var concreteStrategy = (IXmlSerializationStrategy)strategyObject;
 
-            return concreteStrategy.Serialize<TValue>(argument, serializer, DTO);
+            return concreteStrategy.Serialize(argument, serializer, DTO);
         }
 
         public bool Serialize(ISerializationArgument argument, Type DTOType, object DTO)
@@ -50,7 +50,11 @@ namespace HereticalSolutions.Persistence.Serializers
 
             var serializer = new XmlSerializer(typeof(TValue));
             
-            return concreteStrategy.Deserialize<TValue>(argument, serializer, out DTO);
+            var result = concreteStrategy.Deserialize(argument, serializer, out object dtoObject);
+
+            DTO = (TValue)dtoObject;
+
+            return result;
         }
 
         public bool Deserialize(ISerializationArgument argument, Type DTOType, out object DTO)

@@ -9,7 +9,7 @@ namespace HereticalSolutions.Persistence.Serializers
 {
     public class UnitySerializeXmlIntoPlayerPrefsStrategy : IXmlSerializationStrategy
     {
-        public bool Serialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, TValue value)
+        public bool Serialize(ISerializationArgument argument, XmlSerializer serializer, object value)
         {
             string prefsKey = ((UnityPlayerPrefsArgument)argument).PrefsKey;
 
@@ -29,20 +29,20 @@ namespace HereticalSolutions.Persistence.Serializers
             return true;
         }
 
-        public bool Deserialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, out TValue value)
+        public bool Deserialize(ISerializationArgument argument, XmlSerializer serializer, out object value)
         {
             string prefsKey = ((UnityPlayerPrefsArgument)argument).PrefsKey;
 
             if (!PlayerPrefs.HasKey(prefsKey))
             {
-                value = default(TValue);
+                value = default(object);
                 
                 return false;
             }
 
             using (StringReader stringReader = new StringReader(PlayerPrefs.GetString(prefsKey)))
             {
-                value = (TValue)serializer.Deserialize(stringReader);
+                value = serializer.Deserialize(stringReader);
             }
             
             return true;

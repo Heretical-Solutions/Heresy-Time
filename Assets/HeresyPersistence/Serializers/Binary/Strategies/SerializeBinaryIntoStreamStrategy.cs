@@ -8,7 +8,7 @@ namespace HereticalSolutions.Persistence.Serializers
 {
     public class SerializeBinaryIntoStreamStrategy : IBinarySerializationStrategy
     {
-        public bool Serialize<TValue>(ISerializationArgument argument, BinaryFormatter formatter, TValue value)
+        public bool Serialize(ISerializationArgument argument, BinaryFormatter formatter, object value)
         {
             FileSystemSettings fileSystemSettings = ((StreamArgument)argument).Settings;
             
@@ -22,18 +22,18 @@ namespace HereticalSolutions.Persistence.Serializers
             return true;
         }
 
-        public bool Deserialize<TValue>(ISerializationArgument argument, BinaryFormatter formatter, out TValue value)
+        public bool Deserialize(ISerializationArgument argument, BinaryFormatter formatter, out object value)
         {
             FileSystemSettings fileSystemSettings = ((StreamArgument)argument).Settings;
             
             if (!StreamIO.OpenReadStream(fileSystemSettings, out FileStream fileStream))
             {
-                value = default(TValue);
+                value = default(object);
                 
                 return false;
             }
 
-            value = (TValue)formatter.Deserialize(fileStream);
+            value = formatter.Deserialize(fileStream);
             
             StreamIO.CloseStream(fileStream);
 

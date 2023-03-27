@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Globalization;
 using System.IO;
@@ -11,7 +12,7 @@ namespace HereticalSolutions.Persistence.Serializers
 {
     public class UnitySerializeCsvIntoStreamStrategy : ICsvSerializationStrategy
     {
-        public bool Serialize<TValue>(ISerializationArgument argument, TValue value)
+        public bool Serialize(ISerializationArgument argument, Type valueType, object value)
         {
             UnityFileSystemSettings fileSystemSettings = ((UnityStreamArgument)argument).Settings;
             
@@ -20,8 +21,6 @@ namespace HereticalSolutions.Persistence.Serializers
             
             using (var csvWriter = new CsvWriter(streamWriter, CultureInfo.InvariantCulture))
             {
-                var valueType = typeof(TValue); 
-                
                 if (valueType.IsTypeGenericArray()
                     || valueType.IsTypeEnumerable()
                     || valueType.IsTypeGenericEnumerable())
@@ -37,19 +36,17 @@ namespace HereticalSolutions.Persistence.Serializers
             return true;
         }
 
-        public bool Deserialize<TValue>(ISerializationArgument argument, out TValue value)
+        public bool Deserialize(ISerializationArgument argument, Type valueType, out object value)
         {
             UnityFileSystemSettings fileSystemSettings = ((UnityStreamArgument)argument).Settings;
 
-            value = default(TValue);
+            value = default(object);
             
             if (!UnityStreamIO.OpenReadStream(fileSystemSettings, out StreamReader streamReader))
                 return false;
             
             using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
             {
-                var valueType = typeof(TValue); 
-                
                 if (valueType.IsTypeGenericArray()
                     || valueType.IsTypeEnumerable()
                     || valueType.IsTypeGenericEnumerable())
@@ -60,13 +57,13 @@ namespace HereticalSolutions.Persistence.Serializers
                     
                     var records = csvReader.GetRecords(underlyingType);
 
-                    value = (TValue)records;
+                    value = records;
                 }
                 else
                 {
                     csvReader.Read();   
                     
-                    value = csvReader.GetRecord<TValue>();
+                    value = csvReader.GetRecord(valueType);
                 }
             }
             

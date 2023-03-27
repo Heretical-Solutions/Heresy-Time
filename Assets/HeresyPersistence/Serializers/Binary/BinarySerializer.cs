@@ -25,7 +25,7 @@ namespace HereticalSolutions.Persistence.Serializers
 
 			var concreteStrategy = (IBinarySerializationStrategy)strategyObject;
 
-			return concreteStrategy.Serialize<TValue>(argument, formatter, DTO);
+			return concreteStrategy.Serialize(argument, formatter, DTO);
 		}
 
 		public bool Serialize(ISerializationArgument argument, Type DTOType, object DTO)
@@ -45,7 +45,11 @@ namespace HereticalSolutions.Persistence.Serializers
 
 			var concreteStrategy = (IBinarySerializationStrategy)strategyObject;
 
-			return concreteStrategy.Deserialize<TValue>(argument, formatter, out DTO);
+			var result = concreteStrategy.Deserialize(argument, formatter, out object dtoObject);
+
+			DTO = (TValue)dtoObject;
+
+			return result;
 		}
 
 		public bool Deserialize(ISerializationArgument argument, Type DTOType, out object DTO)

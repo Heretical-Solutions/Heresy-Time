@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Globalization;
 using System.IO;
@@ -11,7 +12,7 @@ namespace HereticalSolutions.Persistence.Serializers
 {
     public class SerializeCsvIntoTextFileStrategy : ICsvSerializationStrategy
     {
-        public bool Serialize<TValue>(ISerializationArgument argument, TValue value)
+        public bool Serialize(ISerializationArgument argument, Type valueType, object value)
         {
             FileSystemSettings fileSystemSettings = ((TextFileArgument)argument).Settings;
 
@@ -21,8 +22,6 @@ namespace HereticalSolutions.Persistence.Serializers
             {
                 using (var csvWriter = new CsvWriter(stringWriter, CultureInfo.InvariantCulture))
                 {
-                    var valueType = typeof(TValue); 
-                
                     if (valueType.IsTypeGenericArray()
                         || valueType.IsTypeEnumerable()
                         || valueType.IsTypeGenericEnumerable())
@@ -39,7 +38,7 @@ namespace HereticalSolutions.Persistence.Serializers
             return TextFileIO.Write(fileSystemSettings, csv);
         }
 
-        public bool Deserialize<TValue>(ISerializationArgument argument, out TValue value)
+        public bool Deserialize(ISerializationArgument argument, Type valueType, out object value)
         {
             FileSystemSettings fileSystemSettings = ((TextFileArgument)argument).Settings;
 
@@ -47,7 +46,7 @@ namespace HereticalSolutions.Persistence.Serializers
 
             if (!result)
             {
-                value = default(TValue);
+                value = default(object);
                 
                 return false;
             }
@@ -56,8 +55,6 @@ namespace HereticalSolutions.Persistence.Serializers
             {
                 using (var csvReader = new CsvReader(stringReader, CultureInfo.InvariantCulture))
                 {
-                    var valueType = typeof(TValue);
-
                     if (valueType.IsTypeGenericArray()
                         || valueType.IsTypeEnumerable()
                         || valueType.IsTypeGenericEnumerable())
@@ -68,13 +65,13 @@ namespace HereticalSolutions.Persistence.Serializers
 
                         var records = csvReader.GetRecords(underlyingType);
 
-                        value = (TValue)records;
+                        value = records;
                     }
                     else
                     {
                         csvReader.Read();   
                     
-                        value = csvReader.GetRecord<TValue>();
+                        value = csvReader.GetRecord(valueType);
                     }
                 }
             }

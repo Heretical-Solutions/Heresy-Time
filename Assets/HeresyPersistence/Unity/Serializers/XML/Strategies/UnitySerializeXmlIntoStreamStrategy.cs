@@ -8,7 +8,7 @@ namespace HereticalSolutions.Persistence.Serializers
 {
     public class UnitySerializeXmlIntoStreamStrategy : IXmlSerializationStrategy
     {
-        public bool Serialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, TValue value)
+        public bool Serialize(ISerializationArgument argument, XmlSerializer serializer, object value)
         {
             UnityFileSystemSettings fileSystemSettings = ((UnityStreamArgument)argument).Settings;
             
@@ -22,18 +22,18 @@ namespace HereticalSolutions.Persistence.Serializers
             return true;
         }
 
-        public bool Deserialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, out TValue value)
+        public bool Deserialize(ISerializationArgument argument, XmlSerializer serializer, out object value)
         {
             UnityFileSystemSettings fileSystemSettings = ((UnityStreamArgument)argument).Settings;
 
             if (!UnityStreamIO.OpenReadStream(fileSystemSettings, out StreamReader streamReader))
             {
-                value = default(TValue);
+                value = default(object);
 
                 return false;
             }
 
-            value = (TValue)serializer.Deserialize(streamReader);
+            value = serializer.Deserialize(streamReader);
             
             UnityStreamIO.CloseStream(streamReader);
 

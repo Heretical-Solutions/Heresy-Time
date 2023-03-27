@@ -4,9 +4,9 @@ namespace HereticalSolutions.Persistence.Serializers
 {
     public interface IXmlSerializationStrategy
     {
-        bool Serialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, TValue value);
+        bool Serialize(ISerializationArgument argument, XmlSerializer serializer, object value);
         
-        bool Deserialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, out TValue value);
+        bool Deserialize(ISerializationArgument argument, XmlSerializer serializer, out object value);
 
         void Erase(ISerializationArgument argument);
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Globalization;
 using System.IO;
@@ -10,14 +11,12 @@ namespace HereticalSolutions.Persistence.Serializers
 {
     public class SerializeCsvIntoStringStrategy : ICsvSerializationStrategy
     {
-        public bool Serialize<TValue>(ISerializationArgument argument, TValue value)
+        public bool Serialize(ISerializationArgument argument, Type valueType, object value)
         {
             using (StringWriter stringWriter = new StringWriter())
             {
                 using (var csvWriter = new CsvWriter(stringWriter, CultureInfo.InvariantCulture))
                 {
-                    var valueType = typeof(TValue); 
-                
                     if (valueType.IsTypeGenericArray()
                         || valueType.IsTypeEnumerable()
                         || valueType.IsTypeGenericEnumerable())
@@ -34,14 +33,12 @@ namespace HereticalSolutions.Persistence.Serializers
             return true;
         }
 
-        public bool Deserialize<TValue>(ISerializationArgument argument, out TValue value)
+        public bool Deserialize(ISerializationArgument argument, Type valueType, out object value)
         {
             using (StringReader stringReader = new StringReader(((StringArgument)argument).Value))
             {
                 using (var csvReader = new CsvReader(stringReader, CultureInfo.InvariantCulture))
                 {
-                    var valueType = typeof(TValue);
-
                     if (valueType.IsTypeGenericArray()
                         || valueType.IsTypeEnumerable()
                         || valueType.IsTypeGenericEnumerable())
@@ -52,13 +49,13 @@ namespace HereticalSolutions.Persistence.Serializers
 
                         var records = csvReader.GetRecords(underlyingType);
 
-                        value = (TValue)records;
+                        value = records;
                     }
                     else
                     {
                         csvReader.Read();   
                     
-                        value = csvReader.GetRecord<TValue>();
+                        value = csvReader.GetRecord(valueType);
                     }
                 }
             }

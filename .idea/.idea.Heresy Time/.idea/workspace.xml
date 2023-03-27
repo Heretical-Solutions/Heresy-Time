@@ -3,30 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="771f4e40-d3b2-469b-abfd-3b0bdf3edf80" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Heresy Time/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Heresy Time/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/BinarySerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/BinarySerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/Strategies/IBinarySerializationStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/Strategies/IBinarySerializationStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/Strategies/SerializeBinaryIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Binary/Strategies/SerializeBinaryIntoStreamStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/CSVSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/CSVSerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/ICsvSerializationStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/ICsvSerializationStrategy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/SerializeCsvIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/SerializeCsvIntoStreamStrategy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/SerializeCsvIntoStringStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/SerializeCsvIntoStringStrategy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/SerializeCsvIntoTextFileStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/CSV/Strategies/SerializeCsvIntoTextFileStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Protobuf/ProtobufSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Protobuf/ProtobufSerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Protobuf/Strategies/IProtobufSerializationStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Protobuf/Strategies/IProtobufSerializationStrategy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Protobuf/Strategies/SerializeProtobufIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/Protobuf/Strategies/SerializeProtobufIntoStreamStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/IXmlSerializationStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/IXmlSerializationStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXmlIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXmlIntoStreamStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXmlIntoStringStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXmlIntoStringStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXmlIntoTextFileStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/Strategies/SerializeXmlIntoTextFileStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/XMLSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Serializers/XML/XMLSerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/Binary/Strategies/UnitySerializeBinaryIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/Binary/Strategies/UnitySerializeBinaryIntoStreamStrategy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/CSV/UnitySerializeCsvIntoPlayerPrefsStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/CSV/UnitySerializeCsvIntoPlayerPrefsStrategy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/CSV/UnitySerializeCsvIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/CSV/UnitySerializeCsvIntoStreamStrategy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/CSV/UnitySerializeCsvIntoTextFileStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/CSV/UnitySerializeCsvIntoTextFileStrategy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/Protobuf/Strategies/UnitySerializeProtobufIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/Protobuf/Strategies/UnitySerializeProtobufIntoStreamStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXmlIntoPlayerPrefsStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXmlIntoPlayerPrefsStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXmlIntoStreamStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXmlIntoStreamStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXmlIntoTextFileStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HeresyPersistence/Unity/Serializers/XML/Strategies/UnitySerializeXmlIntoTextFileStrategy.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +127,7 @@
       <workItem from="1678850120980" duration="25078000" />
       <workItem from="1679221300218" duration="1894000" />
       <workItem from="1679547152012" duration="32955000" />
-      <workItem from="1679758279675" duration="35098000" />
+      <workItem from="1679758279675" duration="36012000" />
     </task>
     <servers />
   </component>

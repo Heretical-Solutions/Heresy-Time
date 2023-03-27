@@ -21,6 +21,10 @@ namespace HereticalSolutions.Persistence.Serializers
             
             using (var csvWriter = new CsvWriter(streamWriter, CultureInfo.InvariantCulture))
             {
+                csvWriter.WriteHeader(valueType);
+                
+                csvWriter.NextRecord();
+                
                 if (valueType.IsTypeGenericArray()
                     || valueType.IsTypeEnumerable()
                     || valueType.IsTypeGenericEnumerable())
@@ -49,6 +53,10 @@ namespace HereticalSolutions.Persistence.Serializers
 
             using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
             {
+                csvReader.Read();
+                
+                csvReader.ReadHeader();
+                
                 if (valueType.IsTypeGenericArray()
                     || valueType.IsTypeEnumerable()
                     || valueType.IsTypeGenericEnumerable())

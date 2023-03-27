@@ -161,7 +161,7 @@ MonoBehaviour:
   autosaveCooldown: 5
   debugCountdown: 0
   append: 1
-  forceDeserializationRoll: 0.3
+  forceDeserializationRoll: -1
 --- !u!4 &37993513
 Transform:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   autosaveCooldown: 5
   debugCountdown: 0
   append: 1
-  forceDeserializationRoll: 0.3
+  forceDeserializationRoll: -1
 --- !u!4 &283939610
 Transform:
   m_ObjectHideFlags: 0

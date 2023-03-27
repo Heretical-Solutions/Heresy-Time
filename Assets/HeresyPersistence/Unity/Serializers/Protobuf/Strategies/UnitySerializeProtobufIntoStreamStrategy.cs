@@ -18,10 +18,11 @@ namespace HereticalSolutions.Persistence.Serializers
             if (!UnityStreamIO.OpenWriteStream(fileSystemSettings, out FileStream fileStream))
                 return false;
             
-            //According to this, is you serialize an 'object' you should add the following args
+            ProtobufInternalSerializer.Serialize(fileStream, value);
+            
+            //NOT WORKING
             //https://stackoverflow.com/questions/10510081/protobuf-net-argumentnullexception
-            //ProtobufInternalSerializer.Serialize(fileStream, value);
-            ProtobufInternalSerializer.NonGeneric.SerializeWithLengthPrefix(fileStream, value, PrefixStyle.Base128, 1);
+            //ProtobufInternalSerializer.NonGeneric.SerializeWithLengthPrefix(fileStream, value, PrefixStyle.Base128, 1);
             
             UnityStreamIO.CloseStream(fileStream);
 
@@ -39,8 +40,10 @@ namespace HereticalSolutions.Persistence.Serializers
                 return false;
             }
 
-            //value = ProtobufInternalSerializer.Deserialize<TValue>(fileStream);
-            value = ProtobufInternalSerializer.NonGeneric.Deserialize(valueType, fileStream);
+            value = ProtobufInternalSerializer.Deserialize(valueType, fileStream);
+            
+            //NOT WORKING
+            //value = ProtobufInternalSerializer.NonGeneric.Deserialize(valueType, fileStream);
             
             UnityStreamIO.CloseStream(fileStream);
 

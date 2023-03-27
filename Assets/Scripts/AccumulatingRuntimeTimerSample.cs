@@ -192,7 +192,7 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
         binarySerializer.Serialize(binaryStreamArgument, runtimeTimerAsVisitable.DTOType, dto);
         
         //Skip for DTOs with no attributes defined
-        protobufSerializer.Serialize(protobufStreamArgument, runtimeTimerAsVisitable.DTOType, dto);
+        //protobufSerializer.Serialize(protobufStreamArgument, runtimeTimerAsVisitable.DTOType, dto);
         
         jsonSerializer.Serialize(jsonTextFileArgument, runtimeTimerAsVisitable.DTOType, dto);
 
@@ -201,7 +201,7 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
         yamlSerializer.Serialize(yamlTextFileArgument, runtimeTimerAsVisitable.DTOType, dto);
         
         //Skip for DTOs with no attributes defined
-        csvSerializer.Serialize(csvTextFileArgument, runtimeTimerAsVisitable.DTOType, dto);
+        //csvSerializer.Serialize(csvTextFileArgument, runtimeTimerAsVisitable.DTOType, dto);
         
         
         //Debug
@@ -227,9 +227,9 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
         else if (roll < 0.33f) //PROTOBUF
         {
             //Skip for DTOs with no attributes defined
-            deserialized = protobufSerializer.Deserialize(protobufStreamArgument, runtimeTimerAsVisitable.DTOType,  out dto);
+            //deserialized = protobufSerializer.Deserialize(protobufStreamArgument, runtimeTimerAsVisitable.DTOType,  out dto);
             
-            //return false;
+            return false;
         }
         else if (roll < 0.5f) //JSON
             deserialized = jsonSerializer.Deserialize(jsonTextFileArgument, runtimeTimerAsVisitable.DTOType,  out dto);
@@ -240,9 +240,9 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
         else //CSV
         {
             //Skip for DTOs with no attributes defined
-            deserialized = csvSerializer.Deserialize(csvTextFileArgument, runtimeTimerAsVisitable.DTOType,  out dto);
+            //deserialized = csvSerializer.Deserialize(csvTextFileArgument, runtimeTimerAsVisitable.DTOType,  out dto);
             
-            //return false;
+            return false;
         }
 
         if (!deserialized)

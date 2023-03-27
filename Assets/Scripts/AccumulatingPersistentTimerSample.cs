@@ -194,7 +194,7 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
         binarySerializer.Serialize(binaryStreamArgument, persistentTimerAsVisitable.DTOType, dto);
         
         //Skip for DTOs with no attributes defined
-        protobufSerializer.Serialize(protobufStreamArgument, persistentTimerAsVisitable.DTOType, dto);
+        //protobufSerializer.Serialize(protobufStreamArgument, persistentTimerAsVisitable.DTOType, dto);
         
         jsonSerializer.Serialize(jsonTextFileArgument, persistentTimerAsVisitable.DTOType, dto);
 
@@ -203,7 +203,7 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
         yamlSerializer.Serialize(yamlTextFileArgument, persistentTimerAsVisitable.DTOType, dto);
         
         //Skip for DTOs with no attributes defined
-        csvSerializer.Serialize(csvTextFileArgument, persistentTimerAsVisitable.DTOType, dto);
+        //csvSerializer.Serialize(csvTextFileArgument, persistentTimerAsVisitable.DTOType, dto);
         
         
         //Debug
@@ -229,9 +229,9 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
         else if (roll < 0.33f) //PROTOBUF
         {
             //Skip for DTOs with no attributes defined
-            deserialized = protobufSerializer.Deserialize(protobufStreamArgument, persistentTimerAsVisitable.DTOType,  out dto);
+            //deserialized = protobufSerializer.Deserialize(protobufStreamArgument, persistentTimerAsVisitable.DTOType,  out dto);
             
-            //return false;
+            return false;
         }
         else if (roll < 0.5f) //JSON
             deserialized = jsonSerializer.Deserialize(jsonTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
@@ -242,9 +242,9 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
         else //CSV
         {
             //Skip for DTOs with no attributes defined
-            deserialized = csvSerializer.Deserialize(csvTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
+            //deserialized = csvSerializer.Deserialize(csvTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
             
-            //return false;
+            return false;
         }
         
         if (!deserialized)

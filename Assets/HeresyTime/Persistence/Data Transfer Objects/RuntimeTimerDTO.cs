@@ -1,20 +1,40 @@
+using CsvHelper.Configuration.Attributes;
+
+using ProtoBuf;
+
 namespace HereticalSolutions.Time
 {
     [System.Serializable]
+    [Delimiter(",")]
+    [ProtoContract]
     public class RuntimeTimerDTO
     {
-        public string ID;
+        [Name("ID")]
+        [ProtoMember(1)]
+        public string ID { get; set; }
 
-        public ETimerState State;
+        [Name("State")]
+        [ProtoMember(2)]
+        public ETimerState State { get; set; }
 
-        public float CurrentTimeElapsed;
+        [Name("CurrentTimeElapsed")]
+        [ProtoMember(3)]
+        public float CurrentTimeElapsed { get; set; }
         
-        public bool Accumulate;
+        [Name("Accumulate")]
+        [ProtoMember(4)]
+        public bool Accumulate { get; set; }
         
-        public bool Repeat;
+        [Name("Repeat")]
+        [ProtoMember(5)]
+        public bool Repeat { get; set; }
         
-        public float CurrentDuration;
+        [Name("CurrentDuration")]
+        [ProtoMember(6)]
+        public float CurrentDuration { get; set; }
         
-        public float DefaultDuration;
+        [Name("DefaultDuration")]
+        [ProtoMember(7)]
+        public float DefaultDuration { get; set; }
     }
 }

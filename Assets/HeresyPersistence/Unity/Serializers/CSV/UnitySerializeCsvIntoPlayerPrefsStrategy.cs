@@ -44,11 +44,13 @@ namespace HereticalSolutions.Persistence.Serializers
         {
             string prefsKey = ((UnityPlayerPrefsArgument)argument).PrefsKey;
 
-            value = default(TValue);
-
             if (!PlayerPrefs.HasKey(prefsKey))
+            {
+                value = default(TValue);
+                
                 return false;
-            
+            }
+
             using (StringReader stringReader = new StringReader(PlayerPrefs.GetString(prefsKey)))
             {
                 using (var csvReader = new CsvReader(stringReader, CultureInfo.InvariantCulture))
@@ -68,7 +70,11 @@ namespace HereticalSolutions.Persistence.Serializers
                         value = (TValue)records;
                     }
                     else
+                    {
+                        csvReader.Read();   
+                    
                         value = csvReader.GetRecord<TValue>();
+                    }
                 }
             }
             

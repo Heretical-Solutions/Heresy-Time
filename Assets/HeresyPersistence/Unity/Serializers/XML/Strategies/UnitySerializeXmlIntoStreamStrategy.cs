@@ -26,10 +26,12 @@ namespace HereticalSolutions.Persistence.Serializers
         {
             UnityFileSystemSettings fileSystemSettings = ((UnityStreamArgument)argument).Settings;
 
-            value = default(TValue);
-            
             if (!UnityStreamIO.OpenReadStream(fileSystemSettings, out StreamReader streamReader))
+            {
+                value = default(TValue);
+
                 return false;
+            }
 
             value = (TValue)serializer.Deserialize(streamReader);
             

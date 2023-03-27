@@ -42,14 +42,16 @@ namespace HereticalSolutions.Persistence.Serializers
         public bool Deserialize<TValue>(ISerializationArgument argument, out TValue value)
         {
             UnityFileSystemSettings fileSystemSettings = ((UnityTextFileArgument)argument).Settings;
-
-            value = default(TValue);
             
             bool result = UnityTextFileIO.Read(fileSystemSettings, out string csv);
 
             if (!result)
+            {
+                value = default(TValue);
+                
                 return false;
-            
+            }
+
             using (StringReader stringReader = new StringReader(csv))
             {
                 using (var csvReader = new CsvReader(stringReader, CultureInfo.InvariantCulture))
@@ -69,7 +71,11 @@ namespace HereticalSolutions.Persistence.Serializers
                         value = (TValue)records;
                     }
                     else
+                    {
+                        csvReader.Read();   
+                    
                         value = csvReader.GetRecord<TValue>();
+                    }
                 }
             }
 

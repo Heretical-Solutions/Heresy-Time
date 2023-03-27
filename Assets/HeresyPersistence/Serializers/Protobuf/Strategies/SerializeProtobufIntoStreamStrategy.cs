@@ -3,6 +3,7 @@ using System.IO;
 using HereticalSolutions.Persistence.Arguments;
 using HereticalSolutions.Persistence.IO;
 
+using ProtoBuf;
 using ProtobufInternalSerializer = ProtoBuf.Serializer;
 
 namespace HereticalSolutions.Persistence.Serializers
@@ -16,7 +17,10 @@ namespace HereticalSolutions.Persistence.Serializers
             if (!StreamIO.OpenWriteStream(fileSystemSettings, out FileStream fileStream))
                 return false;
             
-            ProtobufInternalSerializer.Serialize(fileStream, value);
+            //According to this, is you serialize an 'object' you should add the following args
+            //https://stackoverflow.com/questions/10510081/protobuf-net-argumentnullexception
+            //ProtobufInternalSerializer.Serialize(fileStream, value);
+            ProtobufInternalSerializer.NonGeneric.SerializeWithLengthPrefix(fileStream, value, PrefixStyle.Base128, 1);
             
             StreamIO.CloseStream(fileStream);
 
@@ -26,13 +30,16 @@ namespace HereticalSolutions.Persistence.Serializers
         public bool Deserialize<TValue>(ISerializationArgument argument, out TValue value)
         {
             FileSystemSettings fileSystemSettings = ((StreamArgument)argument).Settings;
-            
-            value = default(TValue);
-            
+
             if (!StreamIO.OpenReadStream(fileSystemSettings, out FileStream fileStream))
+            {
+                value = default(TValue);
+                
                 return false;
-            
-            value = ProtobufInternalSerializer.Deserialize<TValue>(fileStream);
+            }
+
+            //value = ProtobufInternalSerializer.Deserialize<TValue>(fileStream);
+            value = (TValue)ProtobufInternalSerializer.NonGeneric.Deserialize(typeof(TValue), fileStream);
             
             StreamIO.CloseStream(fileStream);
 

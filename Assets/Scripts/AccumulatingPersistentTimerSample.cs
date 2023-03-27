@@ -193,8 +193,8 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
         //Serialize
         binarySerializer.Serialize(binaryStreamArgument, persistentTimerAsVisitable.DTOType, dto);
         
-        //Skip for timers - no contract defined
-        //protobufSerializer.Serialize(protobufStreamArgument, persistentTimerAsVisitable.DTOType, dto);
+        //Skip for DTOs with no attributes defined
+        protobufSerializer.Serialize(protobufStreamArgument, persistentTimerAsVisitable.DTOType, dto);
         
         jsonSerializer.Serialize(jsonTextFileArgument, persistentTimerAsVisitable.DTOType, dto);
 
@@ -202,6 +202,7 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
 
         yamlSerializer.Serialize(yamlTextFileArgument, persistentTimerAsVisitable.DTOType, dto);
         
+        //Skip for DTOs with no attributes defined
         csvSerializer.Serialize(csvTextFileArgument, persistentTimerAsVisitable.DTOType, dto);
         
         
@@ -227,10 +228,10 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
             deserialized = binarySerializer.Deserialize(binaryStreamArgument, persistentTimerAsVisitable.DTOType,  out dto);
         else if (roll < 0.33f) //PROTOBUF
         {
-            //Skip for timers - no contract defined
-            //deserialized = protobufSerializer.Deserialize(protobufStreamArgument, persistentTimerAsVisitable.DTOType,  out dto);
+            //Skip for DTOs with no attributes defined
+            deserialized = protobufSerializer.Deserialize(protobufStreamArgument, persistentTimerAsVisitable.DTOType,  out dto);
             
-            return false;
+            //return false;
         }
         else if (roll < 0.5f) //JSON
             deserialized = jsonSerializer.Deserialize(jsonTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
@@ -239,7 +240,12 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
         else if (roll < 0.83f) //YAML
             deserialized = yamlSerializer.Deserialize(yamlTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
         else //CSV
+        {
+            //Skip for DTOs with no attributes defined
             deserialized = csvSerializer.Deserialize(csvTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
+            
+            //return false;
+        }
         
         if (!deserialized)
             return false;

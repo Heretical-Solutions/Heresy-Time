@@ -25,12 +25,14 @@ namespace HereticalSolutions.Persistence.Serializers
         public bool Deserialize<TValue>(ISerializationArgument argument, BinaryFormatter formatter, out TValue value)
         {
             UnityFileSystemSettings fileSystemSettings = ((UnityStreamArgument)argument).Settings;
-            
-            value = default(TValue);
-            
+
             if (!UnityStreamIO.OpenReadStream(fileSystemSettings, out FileStream fileStream))
+            {
+                value = default(TValue);
+                
                 return false;
-            
+            }
+
             value = (TValue)formatter.Deserialize(fileStream);
             
             UnityStreamIO.CloseStream(fileStream);

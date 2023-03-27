@@ -28,13 +28,15 @@ namespace HereticalSolutions.Persistence.Serializers
         {
             FileSystemSettings fileSystemSettings = ((TextFileArgument)argument).Settings;
 
-            value = default(TValue);
-            
             bool result = TextFileIO.Read(fileSystemSettings, out string xml);
 
             if (!result)
+            {
+                value = default(TValue);
+                
                 return false;
-            
+            }
+
             using (StringReader stringReader = new StringReader(xml))
             {
                 value = (TValue)serializer.Deserialize(stringReader);

@@ -55,7 +55,11 @@ namespace HereticalSolutions.Persistence.Serializers
                         value = (TValue)records;
                     }
                     else
+                    {
+                        csvReader.Read();   
+                    
                         value = csvReader.GetRecord<TValue>();
+                    }
                 }
             }
             

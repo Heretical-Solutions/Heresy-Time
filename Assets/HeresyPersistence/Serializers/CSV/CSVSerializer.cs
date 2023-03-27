@@ -37,8 +37,6 @@ namespace HereticalSolutions.Persistence.Serializers
 
 		public bool Deserialize<TValue>(ISerializationArgument argument, out TValue DTO)
 		{
-			DTO = (TValue)Activator.CreateInstance(typeof(TValue));
-			
 			if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
 				throw new Exception($"[CSVSerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
 
@@ -49,8 +47,6 @@ namespace HereticalSolutions.Persistence.Serializers
 
 		public bool Deserialize(ISerializationArgument argument, Type DTOType, out object DTO)
 		{
-			DTO = Activator.CreateInstance(DTOType);
-			
 			if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
 				throw new Exception($"[CSVSerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
 

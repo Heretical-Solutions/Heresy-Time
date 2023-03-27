@@ -26,11 +26,13 @@ namespace HereticalSolutions.Persistence.Serializers
         {
             FileSystemSettings fileSystemSettings = ((StreamArgument)argument).Settings;
             
-            value = default(TValue);
-            
             if (!StreamIO.OpenReadStream(fileSystemSettings, out FileStream fileStream))
+            {
+                value = default(TValue);
+                
                 return false;
-            
+            }
+
             value = (TValue)formatter.Deserialize(fileStream);
             
             StreamIO.CloseStream(fileStream);

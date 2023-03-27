@@ -41,11 +41,13 @@ namespace HereticalSolutions.Persistence.Serializers
         {
             FileSystemSettings fileSystemSettings = ((StreamArgument)argument).Settings;
 
-            value = default(TValue);
-            
             if (!StreamIO.OpenReadStream(fileSystemSettings, out StreamReader streamReader))
+            {
+                value = default(TValue);
+                
                 return false;
-            
+            }
+
             using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
             {
                 var valueType = typeof(TValue); 
@@ -63,7 +65,11 @@ namespace HereticalSolutions.Persistence.Serializers
                     value = (TValue)records;
                 }
                 else
+                {
+                    csvReader.Read();   
+                    
                     value = csvReader.GetRecord<TValue>();
+                }
             }
             
             StreamIO.CloseStream(streamReader);

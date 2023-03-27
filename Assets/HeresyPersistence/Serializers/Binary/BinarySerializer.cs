@@ -40,8 +40,6 @@ namespace HereticalSolutions.Persistence.Serializers
 
 		public bool Deserialize<TValue>(ISerializationArgument argument, out TValue DTO)
 		{
-			DTO = default(TValue);
-			
 			if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
 				throw new Exception($"[BinarySerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
 
@@ -52,8 +50,6 @@ namespace HereticalSolutions.Persistence.Serializers
 
 		public bool Deserialize(ISerializationArgument argument, Type DTOType, out object DTO)
 		{
-			DTO = default(object);
-			
 			if (!strategyRepository.TryGet(argument.GetType(), out var strategyObject))
 				throw new Exception($"[BinarySerializer] COULD NOT RESOLVE STRATEGY BY ARGUMENT: {argument.GetType().ToString()}");
 

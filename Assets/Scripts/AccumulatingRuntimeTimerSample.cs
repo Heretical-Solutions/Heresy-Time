@@ -86,7 +86,7 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
     {
         //Initialize timers
         runtimeTimer = TimersFactory.BuildRuntimeTimer(
-            "AccumulatingPersistentTimer",
+            "AccumulatingRuntimeTimer",
             0f);
 
         runtimeTimer.Accumulate = true;
@@ -191,8 +191,8 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
         //Serialize
         binarySerializer.Serialize(binaryStreamArgument, runtimeTimerAsVisitable.DTOType, dto);
         
-        //Skip for timers - no contract defined
-        //protobufSerializer.Serialize(protobufStreamArgument, runtimeTimerAsVisitable.DTOType, dto);
+        //Skip for DTOs with no attributes defined
+        protobufSerializer.Serialize(protobufStreamArgument, runtimeTimerAsVisitable.DTOType, dto);
         
         jsonSerializer.Serialize(jsonTextFileArgument, runtimeTimerAsVisitable.DTOType, dto);
 
@@ -200,6 +200,7 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
 
         yamlSerializer.Serialize(yamlTextFileArgument, runtimeTimerAsVisitable.DTOType, dto);
         
+        //Skip for DTOs with no attributes defined
         csvSerializer.Serialize(csvTextFileArgument, runtimeTimerAsVisitable.DTOType, dto);
         
         
@@ -225,10 +226,10 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
             deserialized = binarySerializer.Deserialize(binaryStreamArgument, runtimeTimerAsVisitable.DTOType,  out dto);
         else if (roll < 0.33f) //PROTOBUF
         {
-            //Skip for timers - no contract defined
-            //deserialized = protobufSerializer.Deserialize(protobufStreamArgument, runtimeTimerAsVisitable.DTOType,  out dto);
+            //Skip for DTOs with no attributes defined
+            deserialized = protobufSerializer.Deserialize(protobufStreamArgument, runtimeTimerAsVisitable.DTOType,  out dto);
             
-            return false;
+            //return false;
         }
         else if (roll < 0.5f) //JSON
             deserialized = jsonSerializer.Deserialize(jsonTextFileArgument, runtimeTimerAsVisitable.DTOType,  out dto);
@@ -237,7 +238,12 @@ public class AccumulatingRuntimeTimerSample : MonoBehaviour
         else if (roll < 0.83f) //YAML
             deserialized = yamlSerializer.Deserialize(yamlTextFileArgument, runtimeTimerAsVisitable.DTOType,  out dto);
         else //CSV
+        {
+            //Skip for DTOs with no attributes defined
             deserialized = csvSerializer.Deserialize(csvTextFileArgument, runtimeTimerAsVisitable.DTOType,  out dto);
+            
+            //return false;
+        }
 
         if (!deserialized)
             return false;

@@ -43,13 +43,15 @@ namespace HereticalSolutions.Persistence.Serializers
         {
             FileSystemSettings fileSystemSettings = ((TextFileArgument)argument).Settings;
 
-            value = default(TValue);
-            
             bool result = TextFileIO.Read(fileSystemSettings, out string csv);
 
             if (!result)
+            {
+                value = default(TValue);
+                
                 return false;
-            
+            }
+
             using (StringReader stringReader = new StringReader(csv))
             {
                 using (var csvReader = new CsvReader(stringReader, CultureInfo.InvariantCulture))
@@ -69,7 +71,11 @@ namespace HereticalSolutions.Persistence.Serializers
                         value = (TValue)records;
                     }
                     else
+                    {
+                        csvReader.Read();   
+                    
                         value = csvReader.GetRecord<TValue>();
+                    }
                 }
             }
 

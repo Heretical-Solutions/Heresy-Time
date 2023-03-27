@@ -27,14 +27,16 @@ namespace HereticalSolutions.Persistence.Serializers
         public bool Deserialize<TValue>(ISerializationArgument argument, XmlSerializer serializer, out TValue value)
         {
             UnityFileSystemSettings fileSystemSettings = ((UnityTextFileArgument)argument).Settings;
-
-            value = default(TValue);
             
             bool result = UnityTextFileIO.Read(fileSystemSettings, out string xml);
 
             if (!result)
+            {
+                value = default(TValue);
+                
                 return false;
-            
+            }
+
             using (StringReader stringReader = new StringReader(xml))
             {
                 value = (TValue)serializer.Deserialize(stringReader);

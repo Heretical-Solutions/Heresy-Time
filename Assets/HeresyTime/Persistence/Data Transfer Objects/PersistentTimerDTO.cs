@@ -1,26 +1,50 @@
 using System;
 
+using CsvHelper.Configuration.Attributes;
+
+using ProtoBuf;
+
 namespace HereticalSolutions.Time
 {
     [System.Serializable]
+    [Delimiter(",")]
+    [ProtoContract]
     public class PersistentTimerDTO
     {
-        public string ID;
+        [Name("ID")]
+        [ProtoMember(1)]
+        public string ID { get; set; }
 
-        public ETimerState State;
+        [Name("State")]
+        [ProtoMember(2)]
+        public ETimerState State { get; set; }
 
-        public DateTime StartTime;
+        [Name("StartTime")]
+        [ProtoMember(3)]
+        public DateTime StartTime { get; set; }
 
-        public DateTime EstimatedFinishTime;
+        [Name("EstimatedFinishTime")]
+        [ProtoMember(4)]
+        public DateTime EstimatedFinishTime { get; set; }
 
-        public TimeSpan SavedProgress;
+        [Name("SavedProgress")]
+        [ProtoMember(5)]
+        public TimeSpan SavedProgress { get; set; }
         
-        public bool Accumulate;
+        [Name("Accumulate")]
+        [ProtoMember(6)]
+        public bool Accumulate { get; set; }
         
-        public bool Repeat;
+        [Name("Repeat")]
+        [ProtoMember(7)]
+        public bool Repeat { get; set; }
         
-        public TimeSpan CurrentDurationSpan;
+        [Name("CurrentDurationSpan")]
+        [ProtoMember(8)]
+        public TimeSpan CurrentDurationSpan { get; set; }
         
-        public TimeSpan DefaultDurationSpan;
+        [Name("DefaultDurationSpan")]
+        [ProtoMember(9)]
+        public TimeSpan DefaultDurationSpan { get; set; }
     }
 }

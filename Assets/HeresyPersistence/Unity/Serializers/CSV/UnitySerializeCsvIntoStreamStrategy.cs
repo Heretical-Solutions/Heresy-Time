@@ -9,13 +9,13 @@ using CsvHelper;
 
 namespace HereticalSolutions.Persistence.Serializers
 {
-    public class SerializeCsvIntoStreamStrategy : ICsvSerializationStrategy
+    public class UnitySerializeCsvIntoStreamStrategy : ICsvSerializationStrategy
     {
         public bool Serialize<TValue>(ISerializationArgument argument, TValue value)
         {
-            FileSystemSettings fileSystemSettings = ((StreamArgument)argument).Settings;
+            UnityFileSystemSettings fileSystemSettings = ((UnityStreamArgument)argument).Settings;
             
-            if (!StreamIO.OpenWriteStream(fileSystemSettings, out StreamWriter streamWriter))
+            if (!UnityStreamIO.OpenWriteStream(fileSystemSettings, out StreamWriter streamWriter))
                 return false;
             
             using (var csvWriter = new CsvWriter(streamWriter, CultureInfo.InvariantCulture))
@@ -32,18 +32,18 @@ namespace HereticalSolutions.Persistence.Serializers
                     csvWriter.WriteRecord(value);
             }
             
-            StreamIO.CloseStream(streamWriter);
+            UnityStreamIO.CloseStream(streamWriter);
 
             return true;
         }
 
         public bool Deserialize<TValue>(ISerializationArgument argument, out TValue value)
         {
-            FileSystemSettings fileSystemSettings = ((StreamArgument)argument).Settings;
+            UnityFileSystemSettings fileSystemSettings = ((UnityStreamArgument)argument).Settings;
 
             value = default(TValue);
             
-            if (!StreamIO.OpenReadStream(fileSystemSettings, out StreamReader streamReader))
+            if (!UnityStreamIO.OpenReadStream(fileSystemSettings, out StreamReader streamReader))
                 return false;
             
             using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
@@ -66,16 +66,16 @@ namespace HereticalSolutions.Persistence.Serializers
                     value = csvReader.GetRecord<TValue>();
             }
             
-            StreamIO.CloseStream(streamReader);
+            UnityStreamIO.CloseStream(streamReader);
 
             return true;
         }
 
         public void Erase(ISerializationArgument argument)
         {
-            FileSystemSettings fileSystemSettings = ((StreamArgument)argument).Settings;
+            UnityFileSystemSettings fileSystemSettings = ((UnityStreamArgument)argument).Settings;
             
-            StreamIO.Erase(fileSystemSettings);
+            UnityStreamIO.Erase(fileSystemSettings);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace HereticalSolutions
@@ -18,7 +19,7 @@ namespace HereticalSolutions
             {
                 if (interfaceType.IsGenericType
                     && interfaceType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
-                return true;
+                    return true;
             }
             
             return false;
@@ -38,7 +39,5 @@ namespace HereticalSolutions
         {
             return type.GetElementType();
         }
-        
-        public static TValue[] ConvertGenericEnumerableToArray(this )
     }
 }

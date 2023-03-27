@@ -1,5 +1,4 @@
 using System.IO;
-using System.Text;
 
 using HereticalSolutions.Persistence.Arguments;
 using HereticalSolutions.Persistence.IO;

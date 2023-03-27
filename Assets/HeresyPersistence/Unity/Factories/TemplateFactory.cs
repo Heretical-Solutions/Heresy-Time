@@ -92,5 +92,24 @@ namespace HereticalSolutions.Persistence.Factories
             
             return new YAMLSerializer(strategyRepository);
         }
+        
+        public static CSVSerializer BuildSimpleUnityCSVSerializer()
+        {
+            IRepository<Type, object> database = RepositoriesFactory.BuildDictionaryRepository<Type, object>();
+            
+            database.Add(typeof(StringArgument), new SerializeCsvIntoStringStrategy());
+            
+            database.Add(typeof(StreamArgument), new SerializeCsvIntoStreamStrategy());
+            database.Add(typeof(TextFileArgument), new SerializeCsvIntoTextFileStrategy());
+            
+            database.Add(typeof(UnityStreamArgument), new UnitySerializeCsvIntoStreamStrategy());
+            database.Add(typeof(UnityTextFileArgument), new UnitySerializeCsvIntoTextFileStrategy());
+            
+            database.Add(typeof(UnityPlayerPrefsArgument), new UnitySerializeCsvIntoPlayerPrefsStrategy());
+            
+            IReadOnlyObjectRepository strategyRepository = RepositoriesFactory.BuildDictionaryObjectRepository(database);
+            
+            return new CSVSerializer(strategyRepository);
+        }
     }
 }

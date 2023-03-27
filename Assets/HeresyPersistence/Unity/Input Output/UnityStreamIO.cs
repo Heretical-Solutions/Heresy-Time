@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Text;
 
 namespace HereticalSolutions.Persistence.IO
 {
@@ -21,6 +22,22 @@ namespace HereticalSolutions.Persistence.IO
             return true;
         }
         
+        public static bool  OpenReadStream(
+            UnityFileSystemSettings settings,
+            out StreamReader streamReader)
+        {
+            string savePath = settings.FullPath;
+
+            streamReader = default(StreamReader);
+
+            if (!FileExists(settings.FullPath))
+                return false;
+
+            streamReader = new StreamReader(savePath, Encoding.UTF8);
+
+            return true;
+        }
+        
         public static bool OpenWriteStream(
             UnityFileSystemSettings settings,
             out FileStream dataStream)
@@ -32,9 +49,30 @@ namespace HereticalSolutions.Persistence.IO
             return true;
         }
 
+        public static bool OpenWriteStream(
+            UnityFileSystemSettings settings,
+            out StreamWriter streamWriter)
+        {
+            string savePath = settings.FullPath;
+
+            streamWriter = new StreamWriter(savePath, false, Encoding.UTF8);
+
+            return true;
+        }
+        
         public static void CloseStream(FileStream dataStream)
         {
             dataStream.Close();
+        }
+        
+        public static void CloseStream(StreamReader streamReader)
+        {
+            streamReader.Close();
+        }
+        
+        public static void CloseStream(StreamWriter streamWriter)
+        {
+            streamWriter.Close();
         }
         
         public static void Erase(UnityFileSystemSettings settings)

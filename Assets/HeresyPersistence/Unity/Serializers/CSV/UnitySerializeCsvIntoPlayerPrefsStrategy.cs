@@ -6,12 +6,16 @@ using HereticalSolutions.Persistence.Arguments;
 
 using CsvHelper;
 
+using UnityEngine;
+
 namespace HereticalSolutions.Persistence.Serializers
 {
-    public class SerializeCsvIntoStringStrategy : ICsvSerializationStrategy
+    public class UnitySerializeCsvIntoPlayerPrefsStrategy : ICsvSerializationStrategy
     {
         public bool Serialize<TValue>(ISerializationArgument argument, TValue value)
         {
+            string prefsKey = ((UnityPlayerPrefsArgument)argument).PrefsKey;
+            
             using (StringWriter stringWriter = new StringWriter())
             {
                 using (var csvWriter = new CsvWriter(stringWriter, CultureInfo.InvariantCulture))
@@ -28,15 +32,24 @@ namespace HereticalSolutions.Persistence.Serializers
                         csvWriter.WriteRecord(value);
                 }
                 
-                ((StringArgument)argument).Value = stringWriter.ToString();
+                PlayerPrefs.SetString(prefsKey, stringWriter.ToString());
             }
+            
+            PlayerPrefs.Save();
             
             return true;
         }
 
         public bool Deserialize<TValue>(ISerializationArgument argument, out TValue value)
         {
-            using (StringReader stringReader = new StringReader(((StringArgument)argument).Value))
+            string prefsKey = ((UnityPlayerPrefsArgument)argument).PrefsKey;
+
+            value = default(TValue);
+
+            if (!PlayerPrefs.HasKey(prefsKey))
+                return false;
+            
+            using (StringReader stringReader = new StringReader(PlayerPrefs.GetString(prefsKey)))
             {
                 using (var csvReader = new CsvReader(stringReader, CultureInfo.InvariantCulture))
                 {
@@ -64,7 +77,12 @@ namespace HereticalSolutions.Persistence.Serializers
         
         public void Erase(ISerializationArgument argument)
         {
-            ((StringArgument)argument).Value = string.Empty;
+            string prefsKey = ((UnityPlayerPrefsArgument)argument).PrefsKey;
+            
+            if (!PlayerPrefs.HasKey(prefsKey))
+                return;
+            
+            PlayerPrefs.DeleteKey(prefsKey);
         }
     }
 }

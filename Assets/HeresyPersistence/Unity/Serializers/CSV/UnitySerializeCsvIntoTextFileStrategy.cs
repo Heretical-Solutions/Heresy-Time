@@ -3,15 +3,20 @@ using System.Globalization;
 using System.IO;
 
 using HereticalSolutions.Persistence.Arguments;
+using HereticalSolutions.Persistence.IO;
 
 using CsvHelper;
 
 namespace HereticalSolutions.Persistence.Serializers
 {
-    public class SerializeCsvIntoStringStrategy : ICsvSerializationStrategy
+    public class UnitySerializeCsvIntoTextFileStrategy : ICsvSerializationStrategy
     {
         public bool Serialize<TValue>(ISerializationArgument argument, TValue value)
         {
+            UnityFileSystemSettings fileSystemSettings = ((UnityTextFileArgument)argument).Settings;
+
+            string csv;
+            
             using (StringWriter stringWriter = new StringWriter())
             {
                 using (var csvWriter = new CsvWriter(stringWriter, CultureInfo.InvariantCulture))
@@ -28,15 +33,24 @@ namespace HereticalSolutions.Persistence.Serializers
                         csvWriter.WriteRecord(value);
                 }
                 
-                ((StringArgument)argument).Value = stringWriter.ToString();
+                csv = stringWriter.ToString();
             }
             
-            return true;
+            return UnityTextFileIO.Write(fileSystemSettings, csv);
         }
 
         public bool Deserialize<TValue>(ISerializationArgument argument, out TValue value)
         {
-            using (StringReader stringReader = new StringReader(((StringArgument)argument).Value))
+            UnityFileSystemSettings fileSystemSettings = ((UnityTextFileArgument)argument).Settings;
+
+            value = default(TValue);
+            
+            bool result = UnityTextFileIO.Read(fileSystemSettings, out string csv);
+
+            if (!result)
+                return false;
+            
+            using (StringReader stringReader = new StringReader(csv))
             {
                 using (var csvReader = new CsvReader(stringReader, CultureInfo.InvariantCulture))
                 {
@@ -58,13 +72,15 @@ namespace HereticalSolutions.Persistence.Serializers
                         value = csvReader.GetRecord<TValue>();
                 }
             }
-            
+
             return true;
         }
         
         public void Erase(ISerializationArgument argument)
         {
-            ((StringArgument)argument).Value = string.Empty;
+            UnityFileSystemSettings fileSystemSettings = ((UnityTextFileArgument)argument).Settings;
+            
+            UnityTextFileIO.Erase(fileSystemSettings);
         }
     }
 }

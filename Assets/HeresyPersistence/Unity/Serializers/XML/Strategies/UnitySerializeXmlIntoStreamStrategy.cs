@@ -1,5 +1,4 @@
 using System.IO;
-using System.Text;
 using System.Xml.Serialization;
 
 using HereticalSolutions.Persistence.Arguments;
@@ -13,15 +12,12 @@ namespace HereticalSolutions.Persistence.Serializers
         {
             UnityFileSystemSettings fileSystemSettings = ((UnityStreamArgument)argument).Settings;
             
-            if (!UnityStreamIO.OpenWriteStream(fileSystemSettings, out var fileStream))
+            if (!UnityStreamIO.OpenWriteStream(fileSystemSettings, out StreamWriter streamWriter))
                 return false;
             
-            using (var streamWriter = new StreamWriter(fileStream))
-            {
-                serializer.Serialize(streamWriter, value);
-            }
+            serializer.Serialize(streamWriter, value);
             
-            UnityStreamIO.CloseStream(fileStream);
+            UnityStreamIO.CloseStream(streamWriter);
 
             return true;
         }
@@ -32,15 +28,12 @@ namespace HereticalSolutions.Persistence.Serializers
 
             value = default(TValue);
             
-            if (!UnityStreamIO.OpenReadStream(fileSystemSettings, out var fileStream))
+            if (!UnityStreamIO.OpenReadStream(fileSystemSettings, out StreamReader streamReader))
                 return false;
 
-            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
-            {
-                value = (TValue)serializer.Deserialize(streamReader);
-            }
+            value = (TValue)serializer.Deserialize(streamReader);
             
-            UnityStreamIO.CloseStream(fileStream);
+            UnityStreamIO.CloseStream(streamReader);
 
             return true;
         }

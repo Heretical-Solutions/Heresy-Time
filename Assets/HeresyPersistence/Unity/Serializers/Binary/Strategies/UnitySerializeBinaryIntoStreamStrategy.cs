@@ -1,3 +1,4 @@
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using HereticalSolutions.Persistence.Arguments;
@@ -11,7 +12,7 @@ namespace HereticalSolutions.Persistence.Serializers
         {
             UnityFileSystemSettings fileSystemSettings = ((UnityStreamArgument)argument).Settings;
             
-            if (!UnityStreamIO.OpenWriteStream(fileSystemSettings, out var fileStream))
+            if (!UnityStreamIO.OpenWriteStream(fileSystemSettings, out FileStream fileStream))
                 return false;
             
             formatter.Serialize(fileStream, value);
@@ -27,7 +28,7 @@ namespace HereticalSolutions.Persistence.Serializers
             
             value = default(TValue);
             
-            if (!UnityStreamIO.OpenReadStream(fileSystemSettings, out var fileStream))
+            if (!UnityStreamIO.OpenReadStream(fileSystemSettings, out FileStream fileStream))
                 return false;
             
             value = (TValue)formatter.Deserialize(fileStream);

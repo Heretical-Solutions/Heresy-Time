@@ -28,6 +28,9 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
     private UnityFileSystemSettings yamlFSSettings;
     
     [SerializeField]
+    private UnityFileSystemSettings csvFSSettings;
+    
+    [SerializeField]
     private float autosaveCooldown = 5f;
 
     [SerializeField]
@@ -62,6 +65,8 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
     
     private ISerializer yamlSerializer;
 
+    private ISerializer csvSerializer;
+    
     //Arguments
     private UnityStreamArgument binaryStreamArgument;
     
@@ -73,6 +78,8 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
     
     private UnityTextFileArgument yamlTextFileArgument;
 
+    private UnityTextFileArgument csvTextFileArgument;
+    
     //Countdowns
     private float countdown;
     
@@ -108,6 +115,8 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
         
         yamlSerializer = PersistenceFactory.BuildSimpleUnityYAMLSerializer();
 
+        csvSerializer = PersistenceFactory.BuildSimpleUnityCSVSerializer();
+        
         //Initialize arguments
         binaryStreamArgument = new UnityStreamArgument();
 
@@ -128,6 +137,10 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
         yamlTextFileArgument = new UnityTextFileArgument();
 
         yamlTextFileArgument.Settings = yamlFSSettings;
+        
+        csvTextFileArgument = new UnityTextFileArgument();
+
+        csvTextFileArgument.Settings = csvFSSettings;
 
         //Initialize countdown
         countdown = autosaveCooldown;
@@ -189,6 +202,8 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
 
         yamlSerializer.Serialize(yamlTextFileArgument, persistentTimerAsVisitable.DTOType, dto);
         
+        csvSerializer.Serialize(csvTextFileArgument, persistentTimerAsVisitable.DTOType, dto);
+        
         
         //Debug
         var timeProgress = ((IPersistentTimerContext)persistentTimer).SavedProgress;
@@ -208,21 +223,23 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
         
         bool deserialized;
         
-        if (roll < 0.2f) //BINARY
+        if (roll < 0.16f) //BINARY
             deserialized = binarySerializer.Deserialize(binaryStreamArgument, persistentTimerAsVisitable.DTOType,  out dto);
-        else if (roll < 0.4f) //PROTOBUF
+        else if (roll < 0.33f) //PROTOBUF
         {
             //Skip for timers - no contract defined
             //deserialized = protobufSerializer.Deserialize(protobufStreamArgument, persistentTimerAsVisitable.DTOType,  out dto);
             
             return false;
         }
-        else if (roll < 0.6f) //JSON
+        else if (roll < 0.5f) //JSON
             deserialized = jsonSerializer.Deserialize(jsonTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
-        else if (roll < 0.8f) //XML
+        else if (roll < 0.66f) //XML
             deserialized = xmlSerializer.Deserialize(xmlTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
-        else //YAML
+        else if (roll < 0.83f) //YAML
             deserialized = yamlSerializer.Deserialize(yamlTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
+        else //CSV
+            deserialized = csvSerializer.Deserialize(csvTextFileArgument, persistentTimerAsVisitable.DTOType,  out dto);
         
         if (!deserialized)
             return false;
@@ -237,16 +254,18 @@ public class AccumulatingPersistentTimerSample : MonoBehaviour
 
             string methodRolled = string.Empty;
 
-            if (roll < 0.2f) //BINARY
+            if (roll < 0.16f) //BINARY
                 methodRolled = "binary";
-            else if (roll < 0.4f) //PROTOBUF
+            else if (roll < 0.33f) //PROTOBUF
                 methodRolled = "protobuf";
-            else if (roll < 0.6f) //JSON
+            else if (roll < 0.5f) //JSON
                 methodRolled = "JSON";
-            else if (roll < 0.8f) //XML
+            else if (roll < 0.66f) //XML
                 methodRolled = "XML";
-            else //YAML
+            else if (roll < 0.83f) //YAML
                 methodRolled = "YAML";
+            else //CSV
+                methodRolled = "CSV";
             
             Debug.Log($"[AccumulatingPersistentTimerSample] ACCUMULATING PERSISTENT TIMER DESERIALIZED. METHOD: \"{methodRolled}\" PROGRESS: HOURS: {timeProgress.Hours.ToString()} MINUTES: {timeProgress.Minutes.ToString()} SECONDS: {timeProgress.Seconds.ToString()}");
         }

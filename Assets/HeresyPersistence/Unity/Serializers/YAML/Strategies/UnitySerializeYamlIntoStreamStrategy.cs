@@ -1,5 +1,4 @@
 using System.IO;
-using System.Text;
 
 using HereticalSolutions.Persistence.Arguments;
 using HereticalSolutions.Persistence.IO;
@@ -12,14 +11,12 @@ namespace HereticalSolutions.Persistence.Serializers
         {
             UnityFileSystemSettings fileSystemSettings = ((UnityStreamArgument)argument).Settings;
             
-            if (!UnityStreamIO.OpenWriteStream(fileSystemSettings, out var fileStream))
+            if (!UnityStreamIO.OpenWriteStream(fileSystemSettings, out StreamWriter streamWriter))
                 return false;
             
-            byte[] data = new UTF8Encoding(true).GetBytes(yaml);
+            streamWriter.Write(yaml);
             
-            fileStream.Write(data, 0, data.Length);
-            
-            UnityStreamIO.CloseStream(fileStream);
+            UnityStreamIO.CloseStream(streamWriter);
 
             return true;
         }
@@ -30,18 +27,16 @@ namespace HereticalSolutions.Persistence.Serializers
             
             yaml = string.Empty;
             
-            if (!UnityStreamIO.OpenReadStream(fileSystemSettings, out var fileStream))
+            if (!UnityStreamIO.OpenReadStream(fileSystemSettings, out StreamReader streamReader))
                 return false;
             
-            var streamReader = new StreamReader(fileStream, Encoding.UTF8);
-
             yaml = streamReader.ReadToEnd();
             
-            UnityStreamIO.CloseStream(fileStream);
+            UnityStreamIO.CloseStream(streamReader);
 
             return true;
         }
-        
+
         public void Erase(ISerializationArgument argument)
         {
             UnityFileSystemSettings fileSystemSettings = ((UnityStreamArgument)argument).Settings;
